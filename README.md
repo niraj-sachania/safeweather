@@ -3,4 +3,6 @@
 ## Project team
 
 - Niraj
+
+- sheena
 - Louie
