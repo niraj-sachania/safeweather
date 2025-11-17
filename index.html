@@ -15,7 +15,33 @@
   </head>
   <body>
     <header></header>
-    <main></main>
+    <main>
+      <div id="search" class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <img
+              src="https://placeholdit.com/100x100/dddddd/999999"
+              alt="Safe Weather Logo"
+              class="d-block mx-auto mt-4 mb-4"
+            />
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-2">
+              <input
+                type="text"
+                id="city-postcode"
+                class="form-control"
+                placeholder="Enter city name or postcode"
+              />
+              <button id="search-btn" class="btn btn-primary">Search</button>
+              <i class="bi bi-geo-alt fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
     <footer></footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
