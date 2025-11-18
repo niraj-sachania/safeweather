@@ -19,10 +19,15 @@ const getWeatherData = async () => {
   }
 };
 
-const populateDiv = (label, divId, data) => {
-  document.getElementById(
-    divId
-  ).innerHTML = `<span class="data-label">${label}</span> ${data.current[divId]}`;
+const populateElement = (label, divId, data) => {
+  const element = document.getElementById(divId);
+  const content = `<span class="data-value">${data.current[divId]}</span>`;
+
+  const htmlString = label
+    ? `<span class="data-label">${label}</span> ${content}`
+    : content;
+
+  element.innerHTML = htmlString;
 };
 
 // Get weather data from our secure proxy server
@@ -34,8 +39,7 @@ const populateDiv = (label, divId, data) => {
   dynamicElements.forEach((element) => {
     const value = element.getAttribute("data-label");
     const key = element.id;
-    // element.innerText = `${label}: ${data.current[dataKey]}`;
-    populateDiv(value, key, data);
+    populateElement(value, key, data);
   });
 
   console.log(data);

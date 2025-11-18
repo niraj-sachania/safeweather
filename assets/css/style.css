@@ -30,6 +30,11 @@ span.data-label {
   display: block;
 }
 
+span.data-value {
+  font-weight: 900;
+  font-size: 2rem;
+}
+
 /* Mobile responsive logo */
 @media (max-width: 768px) {
   .logo {
