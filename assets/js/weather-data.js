@@ -19,9 +19,22 @@ const getWeatherData = async () => {
   }
 };
 
+const populateDiv = (label, divId, data) => {
+  document.getElementById(divId).innerText = `${label}: ${data.current[divId]}`;
+};
+
 // Get weather data from our secure proxy server
 (async () => {
   const data = await getWeatherData();
+
+  const dynamicElements = document.querySelectorAll("[data-label]");
+
+  dynamicElements.forEach((element) => {
+    const value = element.getAttribute("data-label");
+    const key = element.id;
+    // element.innerText = `${label}: ${data.current[dataKey]}`;
+    populateDiv(value, key, data);
+  });
 
   console.log(data);
 })();
