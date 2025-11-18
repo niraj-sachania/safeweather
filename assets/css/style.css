@@ -14,12 +14,20 @@ h3 {
   height: 512px;
 }
 
-#search input, #search button,#search i {
-display:inline-block
+#search input,
+#search button,
+#search i {
+  display: inline-block;
 }
 
-#search i{
-    font-size: 32px;
+#search i {
+  font-size: 32px;
+}
+
+span.data-label {
+  text-transform: uppercase;
+  font-size: small;
+  display: block;
 }
 
 /* Mobile responsive logo */
