@@ -1,5 +1,3 @@
-
-
 function updateLocationName() {
     //Get short location name from geocoding API
     // Update location name card
