@@ -9,6 +9,10 @@ h2,
 h3 {
   font-family: "Space Grotesk", sans-serif;
 }
+.logo {
+  width: 512px;
+  height: 512px;
+}
 
 #search input, #search button,#search i {
 display:inline-block
@@ -16,4 +20,12 @@ display:inline-block
 
 #search i{
     font-size: 32px;
+}
+
+/* Mobile responsive logo */
+@media (max-width: 768px) {
+  .logo {
+    width: 200px;
+    height: 200px;
+  }
 }
