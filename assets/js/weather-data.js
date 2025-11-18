@@ -20,7 +20,9 @@ const getWeatherData = async () => {
 };
 
 const populateDiv = (label, divId, data) => {
-  document.getElementById(divId).innerText = `${label}: ${data.current[divId]}`;
+  document.getElementById(
+    divId
+  ).innerHTML = `<span class="data-label">${label}</span> ${data.current[divId]}`;
 };
 
 // Get weather data from our secure proxy server
