@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--Meta tags for search engines -->
+    <meta
+      name="description"
+      content="Safe Weather provides real-time weather information and forecasts. Check current conditions, temperature, and weather alerts for any city or postcode."
+    />
+    <meta
+      name="keywords"
+      content="weather, weather forecast, temperature, weather app, safe weather, weather conditions, weather alerts, local weather"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -12,12 +21,47 @@
 
     <link rel="stylesheet" href="/assets/css/style.css" />
     <title>Safe Weather</title>
-  <link
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    /> 
+    <!--favicon-->
+    <link
+      rel="icon"
+      href="assets/images/SafeWeatherFavicon.ico"
+      type="image/png"
+      sizes="32x32"
+    />
   </head>
   <body>
+    <header>
+      <div class="container text-center my-4">
+        <div class="row justify-content-center">
+          <div class="col-auto text-center">
+            <img
+              src="./assets/images/SafeWeatherLogo.png"
+              alt="Safe Weather Logo"
+              class="d-block mx-auto mt-4 mb-4 logo"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div id="search" class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="d-flex align-items-center gap-2">
+              <input
+                type="text"
+                id="city-postcode"
+                class="form-control"
+                placeholder="Enter city name or postcode"
+              />
+              <button id="search-btn" class="btn btn-primary">Search</button>
+              <i class="bi bi-geo-alt fs-4"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer></footer>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -25,34 +69,3 @@
     ></script>
   </body>
 </html>
- <script>
-        document.getElementById('weatherForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const location = document.getElementById('location').value;
-            const apiKey = 'YKEY'; 
-            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
-            
-            fetch(apiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.main) {
-                        const weatherInfo = `
-                            <h4>Weather in ${data.name}</h4>
-                            <p>Temperature: <strong>${data.main.temp}°C</strong></p>
-                            <p>Condition: <strong>${data.weather[0].description}</strong></p>
-                        `;
-                        document.getElementById('weatherResult').innerHTML = weatherInfo;
-                        document.getElementById('weatherResult').style.display = 'block';
-                    } else {
-                        document.getElementById('weatherResult').innerHTML = `<p>City not found.</p>`;
-                        document.getElementById('weatherResult').style.display = 'block';
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('weatherResult').innerHTML = `<p>Something went wrong.</p>`;
-                    document.getElementById('weatherResult').style.display = 'block';
-                    console.error('Error fetching weather data:', error);
-                });
-        });
-    </script>

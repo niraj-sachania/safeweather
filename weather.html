@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Info</title>
+    <title>Safe Weather – Weather details for your location</title>
     <link rel="icon" href="https://github.com/LHcode2025/test/raw/main/SafeWeatherLogo.png" type="image/png" sizes="32x32" />
     <style>
         body {
@@ -142,7 +142,7 @@
              <div class="new-box location-box">Location Name</div>
             <div class="new-box rain-coverage-box">Rain Coverage %</div>
             <div class="new-box degrees-box">Degrees 'C</div>
-            <div class="new-box weather-icon-box">Weather Icon</div>
+            <div class="new-box weather-icon-box">Weather Icon<div id="temp" data-label="Temperature"></div></div>
         </div>
 
         <div class="grid-secondary">
@@ -162,5 +162,6 @@
     </div>
 
     <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">Back to Top</button>
+    <script src="assets/js/weather-data.js"></script>
 </body>
 </html>
