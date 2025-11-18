@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Info</title>
+    <link rel="icon" href="https://github.com/LHcode2025/test/raw/main/SafeWeatherLogo.png" type="image/png" sizes="32x32" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+            color: #FFFFFF;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+        .info-box {
+            background-color: #222222;
+            padding: 20px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .new-box {
+            background-color: #222222;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .time-box, .location-box, .rain-coverage-box {
+            grid-column: 1;
+            height: 25px;
+            width: 100px;
+        }
+        .degrees-box {
+            grid-column: 4;
+            height: 100px;
+        }
+        .weather-icon-box {
+            grid-column: 5;
+            height: 200px;
+            width: 200px;
+            background-color: #444444;
+            padding: 20px;
+        }
+        .grid-secondary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .grid-item {
+            background-color: #222222;
+            padding: 20px;
+            text-align: center;
+        }
+        .button {
+            background-color: #444444;
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        .scroll-to-top {
+            position: fixed;
+            bottom: 20px; 
+            right: 20px; 
+            background-color: #444444;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; 
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .grid-secondary {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <script>
+        window.onscroll = function() {
+            const button = document.getElementById("scrollToTop");
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+        };
 
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://github.com/LHcode2025/test/blob/main/SafeWeatherLogo.png?raw=true" alt="SafeWeather Logo" class="logo">
+        
+        <div class="search-container">
+            <input type="text" placeholder="Enter city name">
+            <button class="button">Search</button>
+        </div>
+
+        <div class="grid">
+            <div class="new-box time-box">Time</div>
+             <div class="new-box location-box">Location Name</div>
+            <div class="new-box rain-coverage-box">Rain Coverage %</div>
+            <div class="new-box degrees-box">Degrees 'C</div>
+            <div class="new-box weather-icon-box">Weather Icon</div>
+        </div>
+
+        <div class="grid-secondary">
+            <div class="grid-item">Air Pollution</div>
+            <div class="grid-item">Pollen Count</div>
+            <div class="grid-item">Wind Speed in mph</div>
+            <div class="grid-item">UV Index Icon</div>
+            <div class="grid-item">Coat Rec</div>
+            <div class="grid-item">Umbrella Rec</div>
+            <div class="grid-item">UV Clothes Rec</div>
+            <div class="grid-item">Sunglasses Rec</div>
+        </div>
+
+        <div class="info-box">Interactive Map</div>
+        
+        <div class="info-box">5 Day Forecast</div>
+    </div>
+
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">Back to Top</button>
+</body>
+</html>

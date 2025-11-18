@@ -12,6 +12,10 @@
 
     <link rel="stylesheet" href="/assets/css/style.css" />
     <title>Safe Weather</title>
+  <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    /> 
   </head>
   <body>
     <script
@@ -21,3 +25,34 @@
     ></script>
   </body>
 </html>
+ <script>
+        document.getElementById('weatherForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const location = document.getElementById('location').value;
+            const apiKey = 'YKEY'; 
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.main) {
+                        const weatherInfo = `
+                            <h4>Weather in ${data.name}</h4>
+                            <p>Temperature: <strong>${data.main.temp}°C</strong></p>
+                            <p>Condition: <strong>${data.weather[0].description}</strong></p>
+                        `;
+                        document.getElementById('weatherResult').innerHTML = weatherInfo;
+                        document.getElementById('weatherResult').style.display = 'block';
+                    } else {
+                        document.getElementById('weatherResult').innerHTML = `<p>City not found.</p>`;
+                        document.getElementById('weatherResult').style.display = 'block';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('weatherResult').innerHTML = `<p>Something went wrong.</p>`;
+                    document.getElementById('weatherResult').style.display = 'block';
+                    console.error('Error fetching weather data:', error);
+                });
+        });
+    </script>
