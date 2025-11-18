@@ -38,9 +38,10 @@ function updateWeatherIcon() {
     // Map of temperature + weather conditions to icon URLs
     // Logic that determines the correct icon based on temperature and conditions
 }
-    
+
 
 function updateWeatherData() {
+    // Rain coverage % card
     // Degrees Celsius card
     // UV Index card
     // Windspeed
