@@ -1,3 +1,5 @@
+import {updateAllReccomendations} from "./update-reccomendations.js";
+
 const getWeatherData = async () => {
   // Get latitude and longitude query parameters
   const queryString = window.location.search;
@@ -30,6 +32,7 @@ const populateElement = (label, divId, data) => {
   element.innerHTML = htmlString;
 };
 
+
 // Get weather data from our secure proxy server
 (async () => {
   const data = await getWeatherData();
@@ -43,4 +46,8 @@ const populateElement = (label, divId, data) => {
   });
 
   console.log(data);
+  updateAllReccomendations(data);
+
+
 })();
+
