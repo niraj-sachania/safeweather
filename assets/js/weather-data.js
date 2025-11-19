@@ -1,4 +1,5 @@
-import {updateAllReccomendations} from "./update-reccomendations.js";
+import {updateAllRecs} from "./update-reccomendations.js";
+
 
 const getWeatherData = async () => {
   // Get latitude and longitude query parameters
@@ -46,8 +47,7 @@ const populateElement = (label, divId, data) => {
   });
 
   console.log(data);
-  updateAllReccomendations(data);
-
+  updateAllRecs(data);
 
 })();
 
