@@ -158,6 +158,14 @@ span.data-value {
   padding: 6px;
 }
 
+.search-results.open {
+  display: block;
+}
+
+.bi-geo-alt {
+  cursor: pointer;
+}
+
 .search-results-list {
   list-style: none;
   padding: 0;

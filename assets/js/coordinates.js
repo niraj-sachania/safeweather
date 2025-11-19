@@ -18,6 +18,30 @@ const input = document.querySelector("#city-postcode");
     e.preventDefault();
     handleSearch();
   });
+
+  // Geo icon: get browser geolocation and load weather page for current position
+  document.querySelector("i.bi-geo-alt").addEventListener("click", async () => {
+    btn.disabled = true;
+    showMessage("Detecting your location...");
+    try {
+      const pos = await new Promise((res, rej) =>
+        navigator.geolocation
+          ? navigator.geolocation.getCurrentPosition(res, rej, {
+              enableHighAccuracy: true,
+              timeout: 10000,
+            })
+          : rej(new Error("Geolocation not supported"))
+      );
+      loadWeatherPage(pos.coords.latitude, pos.coords.longitude);
+    } catch (e) {
+      console.error(e);
+      showMessage(
+        "Unable to detect location. Please allow location access or use the search."
+      );
+    } finally {
+      btn.disabled = false;
+    }
+  });
 })();
 
 // Generic functions
@@ -25,6 +49,11 @@ const input = document.querySelector("#city-postcode");
 const clearResults = () => {
   resultsContainer.innerHTML = "";
   resultsContainer.style.display = "none";
+};
+
+const showMessage = (text) => {
+  resultsContainer.textContent = text;
+  resultsContainer.classList.add("open");
 };
 
 // Weather app functions
