@@ -4,22 +4,132 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+/* App-wide gradient background for the weather app */
+:root {
+  /* Flat 2D palette */
+  --bg-color: #021228; /* deep flat navy */
+  --surface: #0b2a48; /* card surface */
+  --surface-2: #05203a; /* slightly darker surface */
+  --accent: #0074e8; /* primary accent */
+  --muted: #9fb6d8; /* muted text */
+  --card-border: #123852;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  /* flat 2D background */
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #eaf6ff; /* light text against dark background */
+  margin: 0;
+}
+
 h1,
 h2,
 h3 {
   font-family: "Space Grotesk", sans-serif;
 }
-.logo {
+.homepage-logo {
   width: 512px;
   height: 512px;
 }
 
-#search input, #search button,#search i {
-display:inline-block
+#search input,
+#search button,
+#search i {
+  display: inline-block;
 }
 
-#search i{
-    font-size: 32px;
+#search i {
+  font-size: 32px;
+}
+
+/* Search bar styling */
+#search {
+  margin-top: 1.5rem;
+}
+
+#search input.form-control {
+  min-width: 260px;
+  max-width: 420px;
+  background: var(--surface-2);
+  border: 1px solid var(--card-border);
+  color: var(--body-text, #eaf6ff);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: none;
+}
+
+#search input.form-control:focus {
+  outline: 2px solid rgba(0, 116, 232, 0.18);
+  outline-offset: 0;
+}
+
+/* Accessible placeholder color: higher contrast against dark background */
+#search input.form-control::placeholder,
+#search input.form-control::-webkit-input-placeholder,
+#search input.form-control:-ms-input-placeholder {
+  color: rgba(234, 246, 255, 0.85);
+  opacity: 1; /* ensure browsers don't dim the placeholder */
+}
+
+/* Primary search button — custom look that fits the dark gradient */
+#search-btn {
+  background: #232e3e;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 120ms ease, opacity 120ms ease;
+}
+
+#search-btn:hover {
+  background: #192635; /* slightly darker accent */
+}
+
+#search-btn:active {
+  opacity: 0.95;
+}
+
+#search-btn:focus {
+  outline: 2px solid rgba(0, 116, 232, 0.18);
+}
+
+/* Small screens: stack input and button */
+@media (max-width: 576px) {
+  #search .d-flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #search input.form-control {
+    width: 100%;
+    max-width: none;
+  }
+
+  #search-btn {
+    width: 100%;
+  }
+}
+
+span.data-label {
+  text-transform: uppercase;
+  font-size: small;
+  display: block;
+}
+
+span.data-value {
+  font-weight: 900;
+  font-size: 2rem;
 }
 
 /* Forecast */
@@ -62,116 +172,52 @@ display:inline-block
 
 /* Mobile responsive logo */
 @media (max-width: 768px) {
-  .logo {
+  .homepage-logo {
     width: 200px;
     height: 200px;
   }
 }
 
+.search-results {
+  /* position the dropdown under the input; container (.d-flex) provides positioning context */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  margin-top: 8px;
+  display: none; /* hidden until there are results */
+  box-sizing: border-box;
+  max-height: 260px;
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  box-shadow: none; /* flat */
+  padding: 6px;
+}
 
-  body {
-            font-family: Arial, sans-serif;
-            background-color: #000000;
-            color: #FFFFFF;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .container {
-            width: 100%;
-            max-width: 800px;
-            text-align: center;
-        }
-        .info-box {
-            background-color: #222222;
-            padding: 20px;
-            margin: 10px 0;
-            text-align: center;
-        }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .new-box {
-            background-color: #222222;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px;
-        }
-        .time-box, .location-box, .rain-coverage-box {
-            grid-column: 1;
-            height: 25px;
-            width: 100px;
-        }
-        .degrees-box {
-            grid-column: 4;
-            height: 100px;
-        }
-        .weather-icon-box {
-            grid-column: 5;
-            height: 200px;
-            width: 200px;
-            background-color: #444444;
-            padding: 20px;
-        }
-        .grid-secondary {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin: 10px 0;
-        }
-        .grid-item {
-            background-color: #222222;
-            padding: 20px;
-            text-align: center;
-        }
-        .button {
-            background-color: #444444;
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            text-align: center;
-        }
-        .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-        .search-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        .scroll-to-top {
-            position: fixed;
-            bottom: 20px; 
-            right: 20px; 
-            background-color: #444444;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            display: none; 
-        }
-        @media (max-width: 600px) {
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .grid-secondary {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+.search-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results-item {
+  margin: 0.35rem 0;
+}
+
+.search-result-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--body-text, #eaf6ff);
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+.search-result-btn:hover,
+.search-result-btn:focus {
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
+}

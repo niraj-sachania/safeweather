@@ -31,8 +31,15 @@ const getWeatherData = async () => {
   }
 };
 
-const populateDiv = (label, divId, data) => {
-  document.getElementById(divId).innerText = `${label}: ${data.current[divId]}`;
+const populateElement = (label, divId, data) => {
+  const element = document.getElementById(divId);
+  const content = `<span class="data-value">${data.current[divId]}</span>`;
+
+  const htmlString = label
+    ? `<span class="data-label">${label}</span> ${content}`
+    : content;
+
+  element.innerHTML = htmlString;
 };
 
 
@@ -96,10 +103,8 @@ function createForecastSection(forecastData) {
   dynamicElements.forEach((element) => {
     const value = element.getAttribute("data-label");
     const key = element.id;
-    // element.innerText = `${label}: ${data.current[dataKey]}`;
-    populateDiv(value, key, data);
+    populateElement(value, key, data);
   });
 
   createForecastSection(data.forecast)
-  console.log(data.forecast);
 })();
