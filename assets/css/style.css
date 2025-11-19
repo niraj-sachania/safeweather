@@ -9,22 +9,35 @@ h2,
 h3 {
   font-family: "Space Grotesk", sans-serif;
 }
-.logo {
+.homepage-logo {
   width: 512px;
   height: 512px;
 }
 
-#search input, #search button,#search i {
-display:inline-block
+#search input,
+#search button,
+#search i {
+  display: inline-block;
 }
 
-#search i{
-    font-size: 32px;
+#search i {
+  font-size: 32px;
+}
+
+span.data-label {
+  text-transform: uppercase;
+  font-size: small;
+  display: block;
+}
+
+span.data-value {
+  font-weight: 900;
+  font-size: 2rem;
 }
 
 /* Mobile responsive logo */
 @media (max-width: 768px) {
-  .logo {
+  .homepage-logo {
     width: 200px;
     height: 200px;
   }
