@@ -107,8 +107,10 @@ function createForecastSection(forecastData) {
     const key = element.id;
     populateElement(value, key, data);
   });
-
+  
   console.log(data);
+
+  createForecastSection(data.forecast)
   updateAllRecs(data);
 
 })();
