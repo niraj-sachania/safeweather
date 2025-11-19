@@ -1,16 +1,15 @@
-import {updateAllRecs} from "./update-reccomendations.js";
+import { updateAllRecs } from "./update-reccomendations.js";
 
 //  Generic functions
 function formatDate(unix) {
-        const date = new Date(unix * 1000);
-        console.log('Formatted date:', date);
-        return date.toLocaleDateString('en-GB', { weekday: 'short' });
-      }
+  const date = new Date(unix * 1000);
+  console.log("Formatted date:", date);
+  return date.toLocaleDateString("en-GB", { weekday: "short" });
+}
 
-      function isTodayCheck(date)
-      {
-       return new Date(date * 1000).toDateString() === new Date().toDateString();
-      }
+function isTodayCheck(date) {
+  return new Date(date * 1000).toDateString() === new Date().toDateString();
+}
 
 const getWeatherData = async () => {
   // Get latitude and longitude query parameters
@@ -44,57 +43,51 @@ const populateElement = (label, divId, data) => {
   element.innerHTML = htmlString;
 };
 
-
 function createForecastSection(forecastData) {
+  const forecastContainer = document.getElementById("forecast");
 
-        const forecastContainer = document.getElementById('forecast');
+  const ICONS = {
+    "clear sky": "☀️",
+    "light rain": "🌧️",
+    "overcast clouds": "☁️",
+    "broken clouds": "⛅",
+    "partly cloudy": "⛅",
+    rain: "🌧️",
+    clouds: "☁️",
+  };
 
-      const ICONS = {
-        'clear sky': '☀️',
-        'light rain': '🌧️',
-        'overcast clouds': '☁️',
-        'broken clouds': '⛅',
-        'partly cloudy': '⛅',
-        'rain': '🌧️',
-        'clouds': '☁️'
-      };
+  function createCard(day) {
+    const card = document.createElement("div");
 
+    card.className = "card";
 
-      
-      function createCard(day) {
-        const card = document.createElement('div');
-      
-        card.className = 'card';
+    const condition = day.weather[0].description;
+    const icon = ICONS[condition.toLowerCase()] || "🌤️";
 
-        const condition = day.weather[0].description;
-        const icon = ICONS[condition.toLowerCase()] || '🌤️';
-
-        const isToday = isTodayCheck(day.dt);
-        const dayLabel = isToday ? 'Today' : formatDate(day.dt);
-         let avg=Math.round((day.temp.max + day.temp.min) / 2);
-        card.innerHTML = `
+    const isToday = isTodayCheck(day.dt);
+    const dayLabel = isToday ? "Today" : formatDate(day.dt);
+    let avg = Math.round((day.temp.max + day.temp.min) / 2);
+    card.innerHTML = `
           <h3>${dayLabel}</h3>
           <div class="icon" aria-label="${condition}">${icon}</div>
           <div class="temps">
               <span class="high">${avg}°C</span>
           </div>
         `;
-        forecastContainer.appendChild(card);
-      }
+    forecastContainer.appendChild(card);
+  }
 
-      function renderForecast(data) {
-        forecastContainer.innerHTML = '';
-        data.forEach(day => createCard(day));
-        
-      }
+  function renderForecast(data) {
+    forecastContainer.innerHTML = "";
+    data.forEach((day) => createCard(day));
+  }
 
-      // Only take today + 5 days
-      if (forecastData) {
-        const fiveDayForecast = forecastData.slice(0, 6);
-        renderForecast(fiveDayForecast);
-      }
+  // Only take today + 5 days
+  if (forecastData) {
+    const fiveDayForecast = forecastData.slice(0, 6);
+    renderForecast(fiveDayForecast);
+  }
 }
-
 
 // Get weather data from our secure proxy server
 (async () => {
@@ -107,11 +100,9 @@ function createForecastSection(forecastData) {
     const key = element.id;
     populateElement(value, key, data);
   });
-  
+
   console.log(data);
 
-  createForecastSection(data.forecast)
+  createForecastSection(data.forecast);
   updateAllRecs(data);
-
 })();
-
