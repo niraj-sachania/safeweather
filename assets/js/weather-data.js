@@ -1,3 +1,5 @@
+import {updateAllRecs} from "./update-reccomendations.js";
+
 //  Generic functions
 function formatDate(unix) {
         const date = new Date(unix * 1000);
@@ -106,5 +108,8 @@ function createForecastSection(forecastData) {
     populateElement(value, key, data);
   });
 
-  createForecastSection(data.forecast)
+  console.log(data);
+  updateAllRecs(data);
+
 })();
+
