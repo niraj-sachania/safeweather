@@ -41,6 +41,4 @@ const populateElement = (label, divId, data) => {
     const key = element.id;
     populateElement(value, key, data);
   });
-
-  console.log(data);
 })();

@@ -4,6 +4,31 @@ body {
   font-family: "Inter", sans-serif;
 }
 
+/* App-wide gradient background for the weather app */
+:root {
+  /* Flat 2D palette */
+  --bg-color: #021228; /* deep flat navy */
+  --surface: #0b2a48; /* card surface */
+  --surface-2: #05203a; /* slightly darker surface */
+  --accent: #0074e8; /* primary accent */
+  --muted: #9fb6d8; /* muted text */
+  --card-border: #123852;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  /* flat 2D background */
+  background-color: var(--bg-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #eaf6ff; /* light text against dark background */
+  margin: 0;
+}
+
 h1,
 h2,
 h3 {
@@ -24,6 +49,78 @@ h3 {
   font-size: 32px;
 }
 
+/* Search bar styling */
+#search {
+  margin-top: 1.5rem;
+}
+
+#search input.form-control {
+  min-width: 260px;
+  max-width: 420px;
+  background: var(--surface-2);
+  border: 1px solid var(--card-border);
+  color: var(--body-text, #eaf6ff);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: none;
+}
+
+#search input.form-control:focus {
+  outline: 2px solid rgba(0, 116, 232, 0.18);
+  outline-offset: 0;
+}
+
+/* Accessible placeholder color: higher contrast against dark background */
+#search input.form-control::placeholder,
+#search input.form-control::-webkit-input-placeholder,
+#search input.form-control:-ms-input-placeholder {
+  color: rgba(234, 246, 255, 0.85);
+  opacity: 1; /* ensure browsers don't dim the placeholder */
+}
+
+/* Primary search button — custom look that fits the dark gradient */
+#search-btn {
+  background: #232e3e;
+  color: #fff;
+  border: none;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background 120ms ease, opacity 120ms ease;
+}
+
+#search-btn:hover {
+  background: #192635; /* slightly darker accent */
+}
+
+#search-btn:active {
+  opacity: 0.95;
+}
+
+#search-btn:focus {
+  outline: 2px solid rgba(0, 116, 232, 0.18);
+}
+
+/* Small screens: stack input and button */
+@media (max-width: 576px) {
+  #search .d-flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #search input.form-control {
+    width: 100%;
+    max-width: none;
+  }
+
+  #search-btn {
+    width: 100%;
+  }
+}
+
 span.data-label {
   text-transform: uppercase;
   font-size: small;
@@ -41,4 +138,48 @@ span.data-value {
     width: 200px;
     height: 200px;
   }
+}
+
+.search-results {
+  /* position the dropdown under the input; container (.d-flex) provides positioning context */
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  margin-top: 8px;
+  display: none; /* hidden until there are results */
+  box-sizing: border-box;
+  max-height: 260px;
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  box-shadow: none; /* flat */
+  padding: 6px;
+}
+
+.search-results-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results-item {
+  margin: 0.35rem 0;
+}
+
+.search-result-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--body-text, #eaf6ff);
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+.search-result-btn:hover,
+.search-result-btn:focus {
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
 }
