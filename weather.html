@@ -10,7 +10,6 @@
       type="image/png"
       sizes="32x32"
     />
-    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -121,21 +120,22 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="assets/css/style.css" />
     <script>
       window.onscroll = function () {
-        const button = document.getElementById("scrollToTop");
+        const button = document.getElementById("scrollToTop")
         if (
           document.body.scrollTop > 20 ||
           document.documentElement.scrollTop > 20
         ) {
-          button.style.display = "block";
+          button.style.display = "block"
         } else {
-          button.style.display = "none";
+          button.style.display = "none"
         }
-      };
+      }
 
       function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({ top: 0, behavior: "smooth" })
       }
     </script>
   </head>
@@ -176,7 +176,16 @@
 
       <div class="info-box">Interactive Map</div>
 
-      <div class="info-box">5 Day Forecast</div>
+      <!-- Forecast section -->
+      <section>
+        <div class="day-forecast">
+          <div class="container py-4">
+            <div id="forecast" class="row g-4">
+              <!-- Cards will be injected here -->
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
     <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
