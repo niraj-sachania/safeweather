@@ -1,9 +1,13 @@
-import { updateAllRecs } from "./update-reccomendations.js";
+import { updateAllRecs } from "./update-recomendations.js";
 import { createForecastSection } from "./five-day-forecast.js";
+import {
+  updateRainCoverage,
+  updateAirQualityIndex,
+  updateUvIndex,
+} from "./update-weather-data.js";
 
 // Store the current weather data globally for map to access without re-fetching
 let currentWeatherData = null;
-
 
 // Export getWeatherData so it can be called by map with specific lat/lon
 export const getWeatherData = async (lat, lon) => {
@@ -44,8 +48,6 @@ const populateElement = (label, divId, data) => {
   element.innerHTML = htmlString;
 };
 
-
-
 // Export function to render weather data (used when map fetches new location)
 export function renderWeatherData(data) {
   if (!data) return;
@@ -61,7 +63,10 @@ export function renderWeatherData(data) {
   console.log("Rendered weather data:", data);
 
   updateAllRecs(data);
-  createForecastSection(data.forecast);  
+  createForecastSection(data.forecast);
+  updateRainCoverage(data.forecast[0].pop);
+  updateAirQualityIndex(data.airPollution[0].aqi);
+  updateUvIndex(data.current.uvi);
 }
 
 // Get weather data from our secure proxy server (initial load)
