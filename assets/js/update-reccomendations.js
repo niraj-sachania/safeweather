@@ -8,21 +8,20 @@ function getCoatRec(temperature) {
     // Sets the coat icon on the card
     // Return a coat emoji (string) so it can be inserted into the DOM
     // Keep the temperature parameter for future logic
-    console.log("getCoatRec:", temperature);
-    if (temperature < 15) {
-        return "light Coat";
-    }
-    else if (temperature < 12) {
-        return "Medium Coat";
-    }
-    else if (temperature < 5) {
-        return "Heavy Coat";
+    if (temperature < -10) {
+        return "Arctic Coat";
     }
     else if (temperature < 0) {
         return "Ski Jacket";
     }
-    else if (temperature < -10) {
-        return "Arctic Coat";
+    else if (temperature < 5) {
+        return "Heavy Coat";
+    }
+    else if (temperature < 10) {
+        return "Light Coat";
+    }
+    else if (temperature < 15) {
+        return "Thin Jacket";
     }
     else {
         return "No Coat Needed";
@@ -38,8 +37,9 @@ function getCoatRec(temperature) {
 function setCoatRec(coatRec) {
     const coatRecElement = document.getElementById("coat");
     // Insert any HTML or text provided by the caller
-    coatRecElement.innerHTML = coatRec;
-
+    if (coatRecElement) {
+        coatRecElement.innerHTML = coatRec;
+    }
 }
 
 /**
@@ -70,7 +70,9 @@ function getUmbrellaRec(rain, pop) {
  */
 function setUmbrellaRec(umbrellaRec) {
     const umbrellaRecElement = document.getElementById("umbrella");
-    umbrellaRecElement.innerHTML = umbrellaRec;
+    if (umbrellaRecElement) {
+        umbrellaRecElement.innerHTML = umbrellaRec;
+    }
 }
 
 
@@ -80,32 +82,30 @@ function setUmbrellaRec(umbrellaRec) {
  * @returns {string|undefined} Recommendation text, or undefined if input invalid.
  */
 function getUVClothesRec(uvi) {
+
+    /**
+     * UV Index Recommendations:
+     * - 0–2: Low - No protection needed.
+     * - 3–5: Moderate - Use sunscreen, seek shade.
+     * - 6–7: High - Protection required.
+     * - 8–10: Very High - Avoid midday sun, wear protection.
+     * - 11+: Extreme - Avoid sun, take all precautions.
+     */
+
     // Accept 0 and fractional values; return undefined only when missing/invalid.
     if (uvi == null || isNaN(uvi)) return undefined;
 
     const uvIndex = Math.floor(Number(uvi));
     let rec = "";
 
-    // if (uvIndex <= 2) {
-    //     rec = "assets/icons/towel.svg";
-    // } else if (uvIndex <= 5) {
-    //     rec = "assets/icons/vest.svg";
-    // } else if (uvIndex <= 7) {
-    //     rec = "assets/icons/tshirt.svg";
-    // } else if (uvIndex <= 10) {
-    //     rec = "assets/icons/straw-hat.svg";
-    // } else {
-    //     rec = "assets/icons/Longsleeve.svg";
-    // }
-
     if (uvIndex <= 2) {
-        rec = "Wear Sunscream";
+        rec = "Wear Suncream";
     } else if (uvIndex <= 7) {
-        rec = "Seek Shade";
-    } else {
         rec = "Wear Protection";
+    } else {
+        rec = "Seek Shade";
     }
-    console.log("getUVClothesRec:", uvi, "->", rec);
+
     return rec;
 }
 
@@ -117,7 +117,9 @@ function getUVClothesRec(uvi) {
  */
 function setUVClothesRec(uvClothesRec) {
     const uvClothesRecElement = document.getElementById("sun");
-    uvClothesRecElement.innerHTML = uvClothesRec;
+    if (uvClothesRecElement) {
+        uvClothesRecElement.innerHTML = uvClothesRec;
+    }
 }
 
 
@@ -134,10 +136,11 @@ function getMaskRec(pollutionIndex) {
 
     const maskMap = new Map([
         [0, "Yes"],
-        [1, "Take caution"],
-        [2, "Close windows"],
-        [3, "Use an air filter"],
-        [4, "Avoid outdoor activity"]
+        [1, "Yes"],
+        [2, "Take caution"],
+        [3, "Avoid extended outdoor time"],
+        [4, "Close Windows"],
+        [5, "Use an air filter"]
     ]);
 
     let val = Number(pollutionIndex);
@@ -154,7 +157,7 @@ function getMaskRec(pollutionIndex) {
     val = Math.max(0, Math.min(4, val));
 
     const rec = maskMap.get(val);
-    console.log("getMaskRec:", pollutionIndex, "->", rec);
+
     return rec;
 
 }
@@ -166,7 +169,9 @@ function getMaskRec(pollutionIndex) {
  */
 function setMaskRec(maskRec) {
     const airQualityRecElement = document.getElementById("air");
-    airQualityRecElement.innerHTML = maskRec;
+    if (airQualityRecElement) {
+        airQualityRecElement.innerHTML = maskRec;
+    }
 }
 
 
