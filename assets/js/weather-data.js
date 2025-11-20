@@ -1,5 +1,8 @@
 import { updateAllRecs } from "./update-reccomendations.js";
 
+// Store the current weather data globally for map to access without re-fetching
+let currentWeatherData = null;
+
 //  Generic functions
 function formatDate(unix) {
   const date = new Date(unix * 1000);
@@ -11,12 +14,15 @@ function isTodayCheck(date) {
   return new Date(date * 1000).toDateString() === new Date().toDateString();
 }
 
-const getWeatherData = async () => {
-  // Get latitude and longitude query parameters
-  const queryString = window.location.search;
-  const searchParams = new URLSearchParams(queryString);
-  const lat = searchParams.get("lat");
-  const lon = searchParams.get("lon");
+// Export getWeatherData so it can be called by map with specific lat/lon
+export const getWeatherData = async (lat, lon) => {
+  // If lat/lon not provided, try query parameters
+  if (!lat || !lon) {
+    const queryString = window.location.search;
+    const searchParams = new URLSearchParams(queryString);
+    lat = searchParams.get("lat");
+    lon = searchParams.get("lon");
+  }
 
   try {
     const weatherData = await fetch(
@@ -24,7 +30,7 @@ const getWeatherData = async () => {
     );
 
     const data = await weatherData.json();
-
+    currentWeatherData = data;
     return data;
   } catch (error) {
     console.error("Error fetching weather data:", error);
@@ -32,8 +38,12 @@ const getWeatherData = async () => {
   }
 };
 
+// Export function to get current weather data without re-fetching
+export const getCurrentWeatherData = () => currentWeatherData;
+
 const populateElement = (label, divId, data) => {
   const element = document.getElementById(divId);
+  if (!element) return;
   const content = `<span class="data-value">${data.current[divId]}</span>`;
 
   const htmlString = label
@@ -89,9 +99,9 @@ function createForecastSection(forecastData) {
   }
 }
 
-// Get weather data from our secure proxy server
-(async () => {
-  const data = await getWeatherData();
+// Export function to render weather data (used when map fetches new location)
+export function renderWeatherData(data) {
+  if (!data) return;
 
   const dynamicElements = document.querySelectorAll("[data-label]");
 
@@ -101,8 +111,14 @@ function createForecastSection(forecastData) {
     populateElement(value, key, data);
   });
 
-  console.log(data);
+  console.log("Rendered weather data:", data);
 
   createForecastSection(data.forecast);
   updateAllRecs(data);
+}
+
+// Get weather data from our secure proxy server (initial load)
+(async () => {
+  const data = await getWeatherData();
+  renderWeatherData(data);
 })();
