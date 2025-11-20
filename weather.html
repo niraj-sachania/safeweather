@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+ <head>
     <meta charset="UTF-8" />
     <meta
       name="description"
@@ -159,6 +159,10 @@
       function scrollToTop() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
+
+    function goToPage() {
+      window.location.href = 'https://niraj-sachania.github.io/safeweather/';
+    }
     </script>
   </head>
   <body>
@@ -175,8 +179,8 @@
       </div>
 
       <div class="grid">
-        <div class="new-box time-box">Time</div>
         <div class="new-box location-box">Location Name</div>
+        <div class="new-box time-box">Time</div>
         <div class="new-box rain-coverage-box">Rain Coverage %</div>
         <div class="new-box degrees-box">Degrees 'C</div>
         <div class="new-box weather-icon-box">
@@ -221,6 +225,51 @@
         </div>
       </section>
     </div>
+    <div class="new-box degrees-box">
+      <div id="temp" data-label="Temperature"></div> °C
+    </div>
+    <div class="new-box weather-icon-box">
+      Weather Icon
+
+    </div>
+  </div>
+
+  <div class="grid-secondary">
+    <div class="grid-item">Air Pollution <div id="aqi"></div>
+    </div>
+    <div class="grid-item">
+      <div id="humidity" data-label="humidity"></div>
+    </div>
+    <div class="grid-item">
+      <div id="wind_speed" data-label="Wind Speed in mph"></div>
+    </div>
+    <div class="grid-item">
+      <div id="uvi" data-label="UV"></div>
+    </div>
+    <div class="grid-item">Coat Rec</div>
+    <div class="grid-item">Umbrella Rec</div>
+    <div class="grid-item">UV Clothes Rec</div>
+    <div class="grid-item">Sunglasses Rec</div>
+  </div>
+
+  <div class="info-box">Interactive Map</div>
+  <div class="info-box">5 Day Forecast</div>
+  </div>
+
+  <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+    Back to Top
+  </button>
+  <footer>
+    <div class="footer-content">
+      <img src="https://github.com/niraj-sachania/safeweather/blob/main/assets/images/SafeWeatherLogo.svg?raw=true"
+        alt="Safe Weather Logo" class="footer-logo" />
+      <p>&copy; 2025 Safe Weather. All rights reserved.</p>
+
+    </div>
+  </footer>
+
+  <script src="assets/js/weather-data.js"></script>
+</body>
 
     <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
       Back to Top
@@ -239,4 +288,8 @@
     <!-- Initialize interactive map -->
     <script type="module" src="assets/js/map-init.js"></script>
   </body>
+</html>
+<script src="assets/js/weather-data.js"></script>
+</body>
+
 </html>
