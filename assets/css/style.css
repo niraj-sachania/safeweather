@@ -72,7 +72,7 @@ h3 {
   max-width: 420px;
   background: var(--surface-2);
   border: 1px solid var(--card-border);
-  color: var(--body-text, #eaf6ff);
+  color: var(#eaf6ff);
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   transition: none;
@@ -173,7 +173,7 @@ h3 {
 .search-result-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  color: var(--body-text, #eaf6ff);
+  color: var(#eaf6ff);
   width: 100%;
   text-align: left;
   padding: 0.5rem 0.75rem;
@@ -252,12 +252,12 @@ span.data-value {
 }
 
 .degrees-box {
-  grid-column: 4;
+  grid-column: 2;
   height: 100px;
 }
 
 .weather-icon-box {
-  grid-column: 5;
+  grid-column: 2;
   height: 200px;
   width: 200px;
   padding: 20px;
@@ -356,6 +356,7 @@ input[type="text"] {
     text-align: center;
   }
 
+  /* On mobile, .grid-secondary switches from 4 columns (desktop) to 2 columns for better readability */
   .grid-secondary {
     grid-template-columns: repeat(2, 1fr);
   }
