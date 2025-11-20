@@ -5,6 +5,7 @@ import {
   updateAirQualityIndex,
   updateUvIndex,
 } from "./update-weather-data.js";
+import { updateWeatherIcon } from "./update-weather-data.js";
 
 // Store the current weather data globally for map to access without re-fetching
 let currentWeatherData = null;
@@ -62,6 +63,7 @@ export function renderWeatherData(data) {
 
   console.log("Rendered weather data:", data);
 
+  updateWeatherIcon(data.forecast);
   updateAllRecs(data);
   createForecastSection(data.forecast);
   updateRainCoverage(data.forecast[0].pop);
