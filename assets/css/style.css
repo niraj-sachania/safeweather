@@ -12,11 +12,6 @@
 
 /* High level elements */
 
-/* html,
-body {
-  height: 100vh;
-} */
-
 body {
   font-family: "Inter", sans-serif;
   color: #fff;
@@ -53,18 +48,14 @@ h3 {
 
 /* Homepage: Location search  */
 
+#search {
+  margin-top: 1.5rem;
+}
+
 #search input,
 #search button,
 #search i {
   display: inline-block;
-}
-
-#search i {
-  font-size: 32px;
-}
-
-#search {
-  margin-top: 1.5rem;
 }
 
 #search input.form-control {
