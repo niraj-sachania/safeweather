@@ -1,6 +1,5 @@
 export function formatDate(unix) {
   const date = new Date(unix * 1000);
-  console.log("Formatted date:", date);
   return date.toLocaleDateString("en-GB", { weekday: "short" });
 }
 
