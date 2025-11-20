@@ -32,55 +32,52 @@
 //       ]
 //     },
 
-
 function getWeatherIcon(currentWeather) {
-    // Map example
-    //const weatherIconMap = new Map();
+  // Map example
+  //const weatherIconMap = new Map();
 
-    // weatherIconMap.set("overcast clouds", "assets/icons/overcast.png");
-    // weatherIconMap.set("sunny", "assets/icons/sunny.png");
-    // weatherIconMap.set("snow", "assets/icons/cloudy.png");
+  // weatherIconMap.set("overcast clouds", "assets/icons/overcast.png");
+  // weatherIconMap.set("sunny", "assets/icons/sunny.png");
+  // weatherIconMap.set("snow", "assets/icons/cloudy.png");
 
-    return WeatherIconMap.get(currentWeather);
+  return WeatherIconMap.get(currentWeather);
 }
 
 (function updateWeatherIcon() {
-    const weatherIcon = document.querySelector('#weather-icon');
-    // Map of temperature + weather conditions to icon URLs
-    // Logic that determines the correct icon based on temperature and conditions
-    // What data we need from weatherData:
-    // weatherData.current.weather[0].main
-    // weatherData.current.weather[0].description
-    
-    let currentWeather = weatherData.current.weather[0].description;
-    let Icon = getWeatherIcon(currentWeather);
+  const weatherIcon = document.querySelector("#weather-icon");
+  // Map of temperature + weather conditions to icon URLs
+  // Logic that determines the correct icon based on temperature and conditions
+  // What data we need from weatherData:
+  // weatherData.current.weather[0].main
+  // weatherData.current.weather[0].description
 
-
-
+  let currentWeather = weatherData.current.weather[0].description;
+  let Icon = getWeatherIcon(currentWeather);
 })();
-
 
 function getNext5Days() {
-    const days = [];
-    const today = new Date();
-    
-    for (let i = 0; i < 5; i++) {
-        const date = new Date(today);
-        date.setDate(today.getDate() + i);
-        days.push(date.toLocaleDateString([], { weekday: 'short' }));
-    }
-    
-    return days;
+  const days = [];
+  const today = new Date();
+
+  for (let i = 0; i < 5; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    days.push(date.toLocaleDateString([], { weekday: "short" }));
+  }
+
+  return days;
 }
 
-
 (function Update5dayForecast() {
-    // Create 5-day forecast cards
-
-    // 5 Cards with days from today
-    // For each forecast data object:
-        // Day of the week (Mon, Tue, Wed, Thu, Fri, Sat, Sun) - getNext5Days();
-        // Weatrher icon - getWeatherIcon(CurrentWeather);
-        // Temperature - weatherData.current.temp
-    
+  // Create 5-day forecast cards
+  // 5 Cards with days from today
+  // For each forecast data object:
+  // Day of the week (Mon, Tue, Wed, Thu, Fri, Sat, Sun) - getNext5Days();
+  // Weatrher icon - getWeatherIcon(CurrentWeather);
+  // Temperature - weatherData.current.temp
 })();
+
+const updateAirQualityIndex = (aqi) =>
+  (document.querySelector(
+    "#aqi"
+  ).innerHTML = `<span class="data-label">AIR POLLUTION</span><span class="data-value">${aqi}</span>`);
