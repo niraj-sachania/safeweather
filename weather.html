@@ -37,7 +37,7 @@
   <header>
     <a href="index.html" aria-label="Back to home page"><i class="bi bi-arrow-left"></i></a>
   </header>
-  <div class="container">
+  <main class="container">
 
     <div class="grid">
       <div class="new-box location-name">Location Name</div>
@@ -89,25 +89,24 @@
     <div id="forecast" class="row g-3">
       <!-- Cards injected here -->
     </div>
-  </div>
+  </main>
 
-  <footer>
-    <div class="footer-content">
-      <img src="assets/images/SafeWeatherLogo.svg" alt="Safe Weather Logo" class="footer-logo">
-      <p>&copy; 2025 Safe Weather. All rights reserved.</p>
+  <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+    Back to Top
+  </button>
 
-    </div>
-    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
-      Back to Top
-    </button>
+  <footer class="fixed-bottom py-4">
+    <p class="mb-1">&copy; 2025 Safe Weather</p>
+    <p class="mb-0 small">Weather data provided by <a href="https://openweathermap.org/" target="_blank"
+        rel="noopener noreferrer">OpenWeatherMap</a></p>
   </footer>
+
+  <!-- Load weather data module first -->
+  <script type="module" src="assets/js/weather-data.js"></script>
 
   <!-- Leaflet JS library -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-  <!-- Load weather data module first -->
-  <script type="module" src="assets/js/weather-data.js"></script>
 
   <!-- Initialize interactive map -->
   <script type="module" src="assets/js/map-init.js"></script>
@@ -116,6 +115,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
+
 </body>
 
 </html>
