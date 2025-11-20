@@ -302,7 +302,7 @@ input[type="text"] {
 @media (max-width: 600px) {
   .grid {
     display: grid;
-    grid-template-columns: repeat 1fr;
+    grid-template-columns: repeat(1, 1fr);
     gap: 10px;
     margin: auto;
     width: 100%;
