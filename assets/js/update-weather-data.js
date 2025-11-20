@@ -1,7 +1,7 @@
 import { getWeatherIcon } from "./utils/weather-icons.js";
 
 function airQualitySanitiser() {
-  return null;
+  return 1;
 }
 
 export const updateAirQualityName = (aqi) =>
