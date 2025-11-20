@@ -304,7 +304,7 @@ input[type="text"] {
 /* Weather page: Forecast section */
 
 #forecast {
-  display: flex;          
+  display: flex;
   justify-content: space-between;
 }
 
@@ -313,13 +313,14 @@ input[type="text"] {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   text-align: center;
   background-color: #222222;
-  margin:5px;
+  margin: 5px;
   width: 100%;
 }
 
 #forecast .card h5 {
   margin: 0;
   font-size: 1.1rem;
+}
 
 #forecast .card .icon {
   font-size: 1.8rem;
@@ -333,7 +334,7 @@ input[type="text"] {
   font-weight: bold;
   font-size: 14px;
 }
-  
+
 #forecast .card .card-text {
   font-weight: bold;
   font-size: 14px;

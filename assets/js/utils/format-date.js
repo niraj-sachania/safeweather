@@ -3,7 +3,6 @@ export function formatDate(unix) {
   return date.toLocaleDateString("en-GB", { weekday: "short" });
 }
 
-
 export function isTodayCheck(date) {
   return new Date(date * 1000).toDateString() === new Date().toDateString();
 }
