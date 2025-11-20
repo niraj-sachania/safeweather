@@ -2,7 +2,7 @@ import { updateAllRecs } from "./update-recomendations.js";
 import { createForecastSection } from "./five-day-forecast.js";
 import {
   updateRainCoverage,
-  updateAirQualityIndex,
+  updateAirQualityName,
   updateUvIndex,
 } from "./update-weather-data.js";
 import { updateWeatherIcon } from "./update-weather-data.js";
@@ -67,7 +67,7 @@ export function renderWeatherData(data) {
   updateAllRecs(data);
   createForecastSection(data.forecast);
   updateRainCoverage(data.forecast[0].pop);
-  updateAirQualityIndex(data.airPollution[0].aqi);
+  updateAirQualityName(data.airPollution[0].aqi);
   updateUvIndex(data.current.uvi);
 }
 
