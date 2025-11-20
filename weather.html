@@ -35,28 +35,35 @@
 
 <body>
   <header>
-    <a href="/index.html"><i class="bi bi-arrow-left"></i></a>
+    <a href="index.html" aria-label="Back to home page"><i class="bi bi-arrow-left"></i></a>
   </header>
   <div class="container">
 
     <div class="grid">
       <div class="new-box location-name">Location Name</div>
       <div class="new-box time-box">Time</div>
-      <div class="new-box rain-coverage-box">Rain Coverage %</div>
+      <div class="new-box rain-coverage-box">Rain Coverage <span class="rain-coverage-value"></span>%</div>
       <div class="new-box degrees-box">
         <div id="temp" data-label="Temperature (°C)"></div>
       </div>
-      <div class="new-box weather-icon-box">
-        Weather Icon
-
+      <div class="weather-icon-box">
+        <span id="weather-icon-box"></span>
       </div>
     </div>
 
     <div class="grid-secondary">
-      <div class="grid-item">Air Pollution</div>
-      <div class="grid-item">Pollen Count</div>
-      <div class="grid-item">Wind Speed in mph</div>
-      <div class="grid-item">UV Index Icon</div>
+      <div class="grid-item"> <span class="data-label">Air Pollution</span> <span id="aqi" class="data-value"></span>
+      </div>
+      <div class="grid-item">
+        <div id="humidity" data-label="Humidity"></div>
+      </div>
+      <div class="grid-item">
+        <div id="wind_speed" data-label="Wind speed"></div>
+      </div>
+      <div class="grid-item">
+        <span class="data-label">UV Index Icon</span>
+        <span id="uvi" class="data-value"></span>
+      </div>
 
       <div class="grid-item">
         <span class="data-label">Wear a coat?</span>
@@ -79,20 +86,10 @@
     <div id="interactive-map"></div>
 
     <!-- Forecast section -->
-    <section>
-      <div class="day-forecast">
-        <div class="container py-4">
-          <div id="forecast" class="row g-4">
-            <!-- Cards will be injected here -->
-          </div>
-        </div>
-      </div>
-    </section>
+    <div id="forecast" class="row g-3">
+      <!-- Cards injected here -->
+    </div>
   </div>
-
-  <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
-    Back to Top
-  </button>
 
   <footer>
     <div class="footer-content">
@@ -101,6 +98,9 @@
       <p>&copy; 2025 Safe Weather. All rights reserved.</p>
 
     </div>
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()">
+      Back to Top
+    </button>
   </footer>
 
   <!-- Leaflet JS library -->
@@ -113,6 +113,7 @@
   <!-- Initialize interactive map -->
   <script type="module" src="assets/js/map-init.js"></script>
 
+  <!-- Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>
