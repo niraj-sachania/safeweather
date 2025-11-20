@@ -1,7 +1,8 @@
 import { getWeatherIcon } from "./utils/weather-icons.js";
+import { formatDateTime } from "./utils/format-date.js";
 
 function airQualitySanitiser() {
-  return null;
+  return 1;
 }
 
 export const updateAirQualityName = (aqi) =>
@@ -21,3 +22,6 @@ export function updateWeatherIcon(data) {
     iconElement.innerHTML = weatherIcon;
   }
 }
+
+export const dateTime = (timestamp) =>
+  (document.querySelector("#dateTime").innerText = formatDateTime(timestamp));

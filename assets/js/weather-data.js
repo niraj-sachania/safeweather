@@ -4,6 +4,7 @@ import {
   updateRainCoverage,
   updateAirQualityName,
   updateUvIndex,
+  dateTime,
 } from "./update-weather-data.js";
 import { updateWeatherIcon } from "./update-weather-data.js";
 
@@ -69,6 +70,7 @@ export function renderWeatherData(data) {
   updateRainCoverage(data.forecast[0].pop);
   updateAirQualityName(data.airPollution[0].aqi);
   updateUvIndex(data.current.uvi);
+  dateTime(data.current.dt);
 }
 
 // Get weather data from our secure proxy server (initial load)
