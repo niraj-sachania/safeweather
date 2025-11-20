@@ -89,7 +89,7 @@ function getUVClothesRec(uvi) {
     let rec = "";
 
     if (uvIndex <= 2) {
-        rec = "Wear Sunscream";
+        rec = "Wear Suncream";
     } else if (uvIndex <= 7) {
         rec = "Wear Protection";
     } else {
