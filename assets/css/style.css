@@ -24,12 +24,17 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  font-size: 1rem;
 }
 
 h1,
 h2,
 h3 {
   font-family: "Space Grotesk", sans-serif;
+}
+
+a {
+  color: #ff9c00;
 }
 
 /* Homepage: Logo */
