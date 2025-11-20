@@ -196,7 +196,7 @@ header > a > i {
 /* Weather page: Dashboard */
 
 #dateTime {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
 }
 
 span.data-label {
@@ -240,7 +240,7 @@ span.data-value {
 .time-box {
   grid-column: 1;
   height: 10px;
-  width: 50 px;
+  width: 100%;
 }
 
 .location-name,
