@@ -82,6 +82,16 @@ function setUmbrellaRec(umbrellaRec) {
  * @returns {string|undefined} Recommendation text, or undefined if input invalid.
  */
 function getUVClothesRec(uvi) {
+
+    /**
+     * UV Index Recommendations:
+     * - 0–2: Low - No protection needed.
+     * - 3–5: Moderate - Use sunscreen, seek shade.
+     * - 6–7: High - Protection required.
+     * - 8–10: Very High - Avoid midday sun, wear protection.
+     * - 11+: Extreme - Avoid sun, take all precautions.
+     */
+
     // Accept 0 and fractional values; return undefined only when missing/invalid.
     if (uvi == null || isNaN(uvi)) return undefined;
 
@@ -89,7 +99,7 @@ function getUVClothesRec(uvi) {
     let rec = "";
 
     if (uvIndex <= 2) {
-        rec = "Wear Sunscream";
+        rec = "Wear Suncream";
     } else if (uvIndex <= 7) {
         rec = "Wear Protection";
     } else {
