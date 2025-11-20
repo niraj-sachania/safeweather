@@ -8,13 +8,14 @@
   --surface: #0b2a48; /* card surface */
   --surface-2: #05203a; /* slightly darker surface */
   --card-border: #123852;
+  --search-placeholder-color: #ffffff8c;
 }
 
 /* High level elements */
 
 body {
   font-family: "Inter", sans-serif;
-  color: #fff;
+  color: #ffffff;
   background-color: var(--bg-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -66,7 +67,6 @@ a {
 #search input.form-control {
   min-width: 260px;
   max-width: 420px;
-  background: var(--surface-2);
   border: 1px solid var(--card-border);
   color: #eaf6ff;
   padding: 0.5rem 0.75rem;
@@ -74,17 +74,34 @@ a {
   transition: none;
 }
 
+#search input.form-control,
+#search input.form-control:-webkit-autofill,
+#search input.form-control:-webkit-autofill:hover,
+#search input.form-control:-webkit-autofill:focus {
+  background: var(--surface-2);
+  -webkit-box-shadow: 0 0 0px 1000px var(--surface-2) inset;
+  -webkit-text-fill-color: #eaf6ff;
+}
+
 #search input.form-control:focus {
   outline: 2px solid rgba(0, 116, 232, 0.18);
   outline-offset: 0;
 }
 
-/* Accessible placeholder color: higher contrast against dark background */
-#search input.form-control::placeholder,
-#search input.form-control::-webkit-input-placeholder,
-#search input.form-control:-ms-input-placeholder {
-  color: rgba(234, 246, 255, 0.85);
+/* Define each variant separately as browsers skip one is not recognised in a comma-separated list */
+#search input.form-control::placeholder {
+  color: var(--search-placeholder-color);
   opacity: 1; /* ensure browsers don't dim the placeholder */
+}
+
+#search input.form-control::-webkit-input-placeholder {
+  color: var(--search-placeholder-color);
+  opacity: 1;
+}
+
+#search input.form-control:-ms-input-placeholder {
+  color: var(--search-placeholder-color);
+  opacity: 1;
 }
 
 /* Primary search button — custom look that fits the dark gradient */
@@ -424,18 +441,7 @@ input[type="text"] {
 
 /* Footer */
 
-.footer-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-
-  color: white;
+footer {
   text-align: center;
-}
-
-.footer-logo {
-  width: 50px;
-  height: auto;
-  margin-right: 10px;
+  padding: 2rem 0;
 }
