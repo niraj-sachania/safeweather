@@ -48,7 +48,7 @@ const input = document.querySelector("#city-postcode");
 
 const clearResults = () => {
   resultsContainer.innerHTML = "";
-  resultsContainer.style.display = "none";
+  resultsContainer.classList.remove("open");
 };
 
 const showMessage = (text) => {
@@ -110,19 +110,12 @@ const handleSearch = async () => {
     }
 
     // If API returned a single object with lat/lon fields
-    if (coordinates && coordinates.lat && coordinates.lon) {
-      const lat = coordinates.lat;
-      const lon = coordinates.lon;
-      loadWeatherPage(lat, lon);
-      return;
-    }
-
-    // Otherwise, show a helpful message
-    resultsContainer.textContent =
-      "No locations found. Please try a different query.";
+    if (coords && coords.lat && coords.lon)
+      return loadWeatherPage(coords.lat, coords.lon);
+    showMessage("No locations found. Please try a different query.");
   } catch (err) {
     console.error("Lookup failed:", err);
-    resultsContainer.textContent = "Lookup failed. Please try again.";
+    showMessage("Lookup failed. Please try again.");
   } finally {
     btn.disabled = false;
   }
@@ -158,7 +151,7 @@ const renderChoices = (items) => {
   });
 
   resultsContainer.appendChild(list);
-  resultsContainer.style.display = "block";
+  resultsContainer.classList.add("open");
 };
 
 // Create a dropdown under the input to show multiple coordinate choices
