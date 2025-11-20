@@ -315,9 +315,11 @@ input[type="text"] {
   background-color: #222222;
   margin: 5px;
   width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
-#forecast .card h5 {
+#forecast .card h3 {
   margin: 0;
   font-size: 1.1rem;
 }
