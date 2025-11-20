@@ -31,9 +31,17 @@ export function createForecastSection(forecastData) {
         data.forEach((day) => createCard(day));
     }
 
-    // Only take today + 4 days
-    if (forecastData) {
-        const fiveDayForecast = forecastData.slice(0, 5);
+    // Only take 5 days for small screens and 7 for larger screens
+   let maxCards = window.innerWidth < 577 ? 5 : 7;
+
+    function updateMaxCards() {
+        maxCards = window.innerWidth < 577 ? 5 : 7;
+        if (forecastData) {
+        forecastContainer.innerHTML = "";
+        const fiveDayForecast = forecastData.slice(0, maxCards);
         renderForecast(fiveDayForecast);
+        }
     }
+    updateMaxCards();
+    window.addEventListener("resize", updateMaxCards);
 }
