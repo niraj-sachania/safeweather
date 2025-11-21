@@ -325,24 +325,22 @@ span.data-value {
 }
 
 .weather-icon-box {
-  /* Default icon size can be overridden with --icon-size. The box does
-    not force a fixed height or clip the icon; padding is preserved. */
-  --icon-size: 15rem; /* adjust this or override per element */
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center;
-  border-radius: 12px;
   background-color: transparent;
 }
 
 /* The actual icon (emoji/text) — this controls visual size */
 .weather-icon-box > #weather-icon-box {
   display: inline-block;
-  text-align: center;
+  text-align: left;
   line-height: 1;
   /* By default the icon uses --icon-size but you can override with
      a direct font-size on the span if you want a different value. */
-  font-size: var(--icon-size, 12rem);
+  font-size: 200px;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Weather page: Interactive map */
@@ -423,3 +421,5 @@ span.data-value {
   width: 50px;
   height: 50px;
 }
+
+
