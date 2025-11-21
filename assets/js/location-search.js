@@ -11,7 +11,7 @@ let autocompleteSuggestions = [];
 let selectedSuggestionIndex = -1;
 let autocompleteDebounceTimer = null;
 
-(function initiliase() {
+(function initialise() {
   // Focus the input for accessibility
   //   if (input) input.focus();
 
@@ -143,8 +143,8 @@ const renderAutocompleteSuggestions = (suggestions) => {
       selectSuggestion(location);
     });
 
-    // Touch support
-    button.addEventListener("touchstart", (e) => {
+    // Touch support - use touchend to avoid interfering with scrolling
+    button.addEventListener("touchend", (e) => {
       e.preventDefault();
       selectSuggestion(location);
     });
