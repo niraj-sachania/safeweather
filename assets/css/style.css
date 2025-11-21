@@ -302,7 +302,7 @@ span.data-value {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  overflow-x: auto;
+  overflow-x: none
 }
 
 #forecast .card {
