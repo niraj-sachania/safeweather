@@ -16,6 +16,20 @@ A real-time weather application that provides intelligent clothing and safety re
 - **Weather Icons** - Visual representation of current conditions
 - **Responsive Design** - Mobile-friendly interface using Bootstrap
 
+## Design
+
+### Wireframes
+
+Initial design concepts and user flow:
+
+![Wireframes](docs/wireframes.png)
+
+### Responsive Views
+
+The application is fully responsive across all device sizes:
+
+![Responsive Views](docs/responsive-views.png)
+
 ## Tech Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript (ES6 modules)
