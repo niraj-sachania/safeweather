@@ -11,7 +11,7 @@
   --surface-2: #05203a;
   /* slightly darker surface */
   --card-border: #123852;
-  
+
   /* Align the contents of the right column to the right on large screens */
   .right-col {
     text-align: right;
@@ -231,7 +231,7 @@ header a .bi-chevron-left {
   color: #fff;
 }
 
-header>a>i {
+header > a > i {
   font-size: 3rem !important;
   color: #fff;
 }
@@ -280,52 +280,48 @@ span.data-value {
   font-weight: 600;
 }
 
-
 .location-name {
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-
 .rain-coverage-box {
   min-height: 80px;
 }
 
-.time-box > div{
+.time-box > div {
   width: 100%;
   text-align: center;
 }
-.location-name > div{
+.location-name > div {
   width: 100%;
   text-align: center;
 }
-.rain-coverage-box > div{
+.rain-coverage-box > div {
   width: 100%;
   text-align: center;
 }
 
 @media screen and (min-width: 991px) {
-  .time-box > div{
+  .time-box > div {
     width: 100%;
     text-align: left;
   }
-  .location-name > div{
+  .location-name > div {
     width: 100%;
     text-align: left;
   }
-  .rain-coverage-box > div{
+  .rain-coverage-box > div {
     width: 100%;
     text-align: left;
   }
-
 }
-
 
 .degrees-box {
   min-height: 120px;
   font-size: 2rem;
   font-weight: bold;
-  text-align: center  ;
+  text-align: center;
 }
 
 .weather-icon-box {
@@ -349,7 +345,6 @@ span.data-value {
   font-size: var(--icon-size, 12rem);
 }
 
-
 /* Weather page: Interactive map */
 
 #interactive-map {
@@ -369,29 +364,13 @@ span.data-value {
   }
 }
 
-
-
-@media (min-width: 992px) {
-  .degrees-box {
-    position: relative; /* positioning context for absolute child */
-  }
-
-  .degrees-box #temp {
-    position: absolute;
-    top: 0rem;
-    right: 0rem;
-    transform: none;
-    text-align: right;
-  }
-}
-
 /* Weather page: Forecast section */
 
 #forecast {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  overflow-x: none
+  overflow-x: none;
 }
 
 #forecast .card {
