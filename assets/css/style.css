@@ -11,18 +11,14 @@
   --surface-2: #05203a;
   /* slightly darker surface */
   --card-border: #123852;
+  --search-placeholder-color: #ffffff8c;
 }
 
 /* High level elements */
 
-/* html,
-body {
-  height: 100vh;
-} */
-
 body {
   font-family: "Inter", sans-serif;
-  color: #fff;
+  color: #ffffff;
   background-color: var(--bg-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,12 +28,17 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  font-size: 1rem;
 }
 
 h1,
 h2,
 h3 {
   font-family: "Space Grotesk", sans-serif;
+}
+
+a {
+  color: #ff9c00;
 }
 
 /* Homepage: Logo */
@@ -56,29 +57,33 @@ h3 {
 
 /* Homepage: Location search  */
 
+#search {
+  margin-top: 1.5rem;
+}
+
 #search input,
 #search button,
 #search i {
   display: inline-block;
 }
 
-#search i {
-  font-size: 32px;
-}
-
-#search {
-  margin-top: 1.5rem;
-}
-
 #search input.form-control {
   min-width: 260px;
   max-width: 420px;
-  background: var(--surface-2);
   border: 1px solid var(--card-border);
-  color: var(#eaf6ff);
+  color: #eaf6ff;
   padding: 0.5rem 0.75rem;
   border-radius: 8px;
   transition: none;
+}
+
+#search input.form-control,
+#search input.form-control:-webkit-autofill,
+#search input.form-control:-webkit-autofill:hover,
+#search input.form-control:-webkit-autofill:focus {
+  background: var(--surface-2);
+  -webkit-box-shadow: 0 0 0px 1000px var(--surface-2) inset;
+  -webkit-text-fill-color: #eaf6ff;
 }
 
 #search input.form-control:focus {
@@ -86,13 +91,21 @@ h3 {
   outline-offset: 0;
 }
 
-/* Accessible placeholder color: higher contrast against dark background */
-#search input.form-control::placeholder,
-#search input.form-control::-webkit-input-placeholder,
-#search input.form-control:-ms-input-placeholder {
-  color: rgba(234, 246, 255, 0.85);
+/* Define each variant separately as browsers skip one is not recognised in a comma-separated list */
+#search input.form-control::placeholder {
+  color: var(--search-placeholder-color);
   opacity: 1;
   /* ensure browsers don't dim the placeholder */
+}
+
+#search input.form-control::-webkit-input-placeholder {
+  color: var(--search-placeholder-color);
+  opacity: 1;
+}
+
+#search input.form-control:-ms-input-placeholder {
+  color: var(--search-placeholder-color);
+  opacity: 1;
 }
 
 /* Primary search button — custom look that fits the dark gradient */
@@ -131,6 +144,7 @@ h3 {
   #search input.form-control {
     width: 100%;
     max-width: none;
+    margin-right: 0;
   }
 
   #search-btn {
@@ -178,7 +192,7 @@ h3 {
 .search-result-btn {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  color: var(#eaf6ff);
+  color: #eaf6ff;
   width: 100%;
   text-align: left;
   padding: 0.5rem 0.75rem;
@@ -193,187 +207,82 @@ h3 {
 
 /* Weather page: Header */
 
-header>a>i {
-  font-size: 44px;
+header a .bi-arrow-left {
+  font-size: 3rem !important;
   color: #fff;
 }
 
-/* Weather page: Dashboard */
-
-#dateTime {
-  font-size: 1.5rem;
+header>a>i {
+  font-size: 3rem !important;
+  color: #fff;
 }
+
+/* Weather page: Dynamic data labels and values */
 
 span.data-label {
   text-transform: uppercase;
-  font-size: small;
+  font-size: 0.75rem;
   display: block;
+  color: #adb5bd;
+  margin-bottom: 0.5rem;
 }
 
 span.data-value {
-  font-weight: 900;
-  font-size: 2rem;
+  font-weight: 600;
+  font-size: 1.8rem;
+  display: block;
+  color: #fff;
 }
 
-.container {
-  width: 100%;
-  max-width: 800px;
-  text-align: center;
-}
+/* Weather page: Cards - Bootstrap overrides */
 
-.info-box {
-  background-color: #222222;
-  padding: 20px;
-  margin: 10px 0;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 10px 0;
+.card.bg-dark {
+  background-color: #232e3e !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .new-box {
   background-color: #232e3e;
-  padding: 20px;
+  padding: 1.5rem;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 12px;
   min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .time-box {
-  grid-column: 1;
-  height: 10px;
-  width: 100%;
+  min-height: 100px;
+  font-size: 1.5rem;
 }
 
-.location-name,
+.location-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
 .rain-coverage-box {
-  grid-column: 1;
-  height: auto;
-  width: 100%;
-  margin: 0 auto;
+  min-height: 80px;
 }
 
 .degrees-box {
-  grid-column: 2;
-  height: 100px;
+  min-height: 120px;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .weather-icon-box {
-  grid-column: 2;
-  height: 200px;
-  width: 200px;
-  padding: 20px;
+  min-height: 157px;
   font-size: 5rem;
-}
-
-.grid-secondary {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin: 10px 0;
-}
-
-.grid-item {
   background-color: #232e3e;
-  padding: 20px;
-  text-align: center;
-}
-
-input[type="text"] {
-  padding: 10px;
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 300px;
-}
-
-.scroll-to-top {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #444444;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 10px;
-    margin: auto;
-    width: 100%;
-    max-width: 350px;
-  }
-
-  .location-name {
-    grid-column: 1;
-    height: auto;
-    width: 300px;
-    margin: 0 auto;
-  }
-
-  .time-box {
-    grid-column: 1;
-    height: 10px;
-    width: 300px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .rain-coverage-box {
-    grid-column: 1;
-    height: 10px;
-    width: 300px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .degrees-box {
-    height: 10px;
-    width: 300px;
-    grid-column: 1;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .weather-icon-box {
-    grid-column: 1;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-
-  /* On mobile, .grid-secondary switches from 4 columns (desktop) to 2 columns for better readability */
-  .grid-secondary {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-item {
-    height: auto;
-  }
-
-  .info-box {
-    grid-column: 1;
-    margin: 20px 0;
-  }
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Weather page: Interactive map */
@@ -381,24 +290,24 @@ input[type="text"] {
 #interactive-map {
   height: 450px;
   width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-  background-color: #222222;
+  background-color: #232e3e;
 }
 
 /* Weather page: Forecast section */
 
 #forecast {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  overflow-x: auto;
 }
 
 #forecast .card {
-  border-radius: 5px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  background-color: #232e3e !important;
+  border-radius: 12px;
   text-align: center;
   background-color: #222222;
   margin: 5px;
@@ -415,10 +324,12 @@ input[type="text"] {
 #forecast .card h3 {
   margin: 0;
   font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
 }
 
 #forecast .card .icon {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
   margin: 10px 0;
 }
 
@@ -426,29 +337,21 @@ input[type="text"] {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
 }
 
 #forecast .card .card-text {
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
 }
 
-/* Footer */
+/* Scroll to top button */
 
-.footer-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-
-  color: white;
-  text-align: center;
-}
-
-.footer-logo {
+#scrollToTop {
+  display: none;
   width: 50px;
-  height: auto;
-  margin-right: 10px;
+  height: 50px;
 }
