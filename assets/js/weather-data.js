@@ -41,7 +41,9 @@ export const getCurrentWeatherData = () => currentWeatherData;
 const populateElement = (label, divId, data, units) => {
   const element = document.getElementById(divId);
   if (!element) return;
-  const value = data.current[divId] ?? "";
+  let value = data.current[divId] ?? "";
+
+  if (divId === "temp") value = parseInt(value);
   const content = `<span class="data-value">${value}${units || ""}</span>`;
 
   const htmlString = label
