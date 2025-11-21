@@ -135,7 +135,7 @@ a {
 }
 
 /* Small screens: stack input and button */
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   #search .d-flex {
     flex-direction: column;
     gap: 0.5rem;
@@ -251,7 +251,7 @@ span.data-value {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
 }
 
 .time-box {
@@ -259,14 +259,46 @@ span.data-value {
   font-size: 1.5rem;
 }
 
+
 .location-name {
   font-size: 1.25rem;
   font-weight: 600;
 }
 
+
 .rain-coverage-box {
   min-height: 80px;
 }
+
+.time-box > div{
+  width: 100%;
+  text-align: center;
+}
+.location-name > div{
+  width: 100%;
+  text-align: center;
+}
+.rain-coverage-box > div{
+  width: 100%;
+  text-align: center;
+}
+
+@media screen and (min-width: 991px) {
+  .time-box > div{
+    width: 100%;
+    text-align: left;
+  }
+  .location-name > div{
+    width: 100%;
+    text-align: left;
+  }
+  .rain-coverage-box > div{
+    width: 100%;
+    text-align: left;
+  }
+
+}
+
 
 .degrees-box {
   min-height: 120px;
@@ -282,7 +314,7 @@ span.data-value {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
 }
 
 /* Weather page: Interactive map */
