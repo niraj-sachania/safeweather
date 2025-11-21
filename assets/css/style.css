@@ -4,9 +4,12 @@
 /* Global colours */
 
 :root {
-  --bg-color: #0b131e; /* deep navy */
-  --surface: #0b2a48; /* card surface */
-  --surface-2: #05203a; /* slightly darker surface */
+  --bg-color: #0b131e;
+  /* deep navy */
+  --surface: #0b2a48;
+  /* card surface */
+  --surface-2: #05203a;
+  /* slightly darker surface */
   --card-border: #123852;
   --search-placeholder-color: #ffffff8c;
 }
@@ -91,7 +94,8 @@ a {
 /* Define each variant separately as browsers skip one is not recognised in a comma-separated list */
 #search input.form-control::placeholder {
   color: var(--search-placeholder-color);
-  opacity: 1; /* ensure browsers don't dim the placeholder */
+  opacity: 1;
+  /* ensure browsers don't dim the placeholder */
 }
 
 #search input.form-control::-webkit-input-placeholder {
@@ -156,7 +160,8 @@ a {
   z-index: 999;
   width: 100%;
   margin-top: 8px;
-  display: none; /* hidden until there are results */
+  display: none;
+  /* hidden until there are results */
   box-sizing: border-box;
   max-height: 260px;
   overflow: auto;
@@ -207,7 +212,7 @@ header a .bi-arrow-left {
   color: #fff;
 }
 
-header > a > i {
+header>a>i {
   font-size: 3rem !important;
   color: #fff;
 }
@@ -297,18 +302,23 @@ span.data-value {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  overflow-x: auto;
+  overflow-x: none
 }
 
 #forecast .card {
   background-color: #232e3e !important;
   border-radius: 12px;
   text-align: center;
-  color: #fff !important;
-  padding: 1rem;
-  flex: 1 1 0;
-  min-width: 120px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: #222222;
+  margin: 5px;
+  width: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+#forecast .card:hover {
+  transform: scale(1.08);
 }
 
 #forecast .card h3 {
