@@ -4,9 +4,12 @@
 /* Global colours */
 
 :root {
-  --bg-color: #0b131e; /* deep navy */
-  --surface: #0b2a48; /* card surface */
-  --surface-2: #05203a; /* slightly darker surface */
+  --bg-color: #0b131e;
+  /* deep navy */
+  --surface: #0b2a48;
+  /* card surface */
+  --surface-2: #05203a;
+  /* slightly darker surface */
   --card-border: #123852;
 }
 
@@ -88,7 +91,8 @@ h3 {
 #search input.form-control::-webkit-input-placeholder,
 #search input.form-control:-ms-input-placeholder {
   color: rgba(234, 246, 255, 0.85);
-  opacity: 1; /* ensure browsers don't dim the placeholder */
+  opacity: 1;
+  /* ensure browsers don't dim the placeholder */
 }
 
 /* Primary search button — custom look that fits the dark gradient */
@@ -142,7 +146,8 @@ h3 {
   z-index: 999;
   width: 100%;
   margin-top: 8px;
-  display: none; /* hidden until there are results */
+  display: none;
+  /* hidden until there are results */
   box-sizing: border-box;
   max-height: 260px;
   overflow: auto;
@@ -188,7 +193,7 @@ h3 {
 
 /* Weather page: Header */
 
-header > a > i {
+header>a>i {
   font-size: 44px;
   color: #fff;
 }
@@ -400,6 +405,11 @@ input[type="text"] {
   width: 100%;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  transition: transform 0.3s ease;
+}
+
+#forecast .card:hover {
+  transform: scale(1.08);
 }
 
 #forecast .card h3 {
