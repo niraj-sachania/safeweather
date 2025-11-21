@@ -65,20 +65,83 @@ const getCityOrPostcode = () => {
   return cityOrPostcode;
 };
 
+// Fetch list of countries and cities and return matches based on the user's query.
+// Returns an array of { country, city, display } objects (city may be null)
+// Note: The countriesnow.space API returns country and city names without coordinates.
+// Coordinates are resolved separately using the geocodeLocation helper.
 const getCoordinates = async () => {
   const cityOrPostcode = getCityOrPostcode();
+  if (!cityOrPostcode) return null;
 
   try {
-    const geoCoordinates = await fetch(
-      `https://strong-mermaid-23f3ab.netlify.app/.netlify/functions/getCoordinates?cityOrPostcode=${cityOrPostcode}`
+    const resp = await fetch("https://countriesnow.space/api/v0.1/countries");
+    const json = await resp.json();
+    if (!json || !json.data) return null;
+
+    const q = cityOrPostcode.trim().toLowerCase();
+    const matches = [];
+
+    json.data.forEach(({ country, cities }) => {
+      if (!country) return;
+
+      // if the query matches the country name, add country + its cities (if any)
+      if (country.toLowerCase().includes(q)) {
+        if (Array.isArray(cities) && cities.length) {
+          cities.forEach((city) =>
+            matches.push({ country, city, display: `${city}, ${country}` })
+          );
+        } else {
+          matches.push({ country, city: null, display: country });
+        }
+        return;
+      }
+
+      // otherwise check individual city names
+      if (Array.isArray(cities)) {
+        cities.forEach((city) => {
+          if (city.toLowerCase().includes(q)) {
+            matches.push({ country, city, display: `${city}, ${country}` });
+          }
+        });
+      }
+    });
+
+    // Deduplicate on display label
+    const deduped = Array.from(
+      new Map(matches.map((m) => [m.display.toLowerCase(), m])).values()
     );
 
-    const coordinates = await geoCoordinates.json();
-
-    return coordinates.geoCoordinates;
+    return deduped;
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error("Error fetching countries list:", error);
     throw error;
+  }
+};
+
+// Lightweight geocoding using Nominatim (OpenStreetMap). Returns { lat, lon } or null.
+// Note: Nominatim has usage terms/rate limits. For production use, consider a server-side
+// geocode service or an API key-based provider.
+const geocodeLocation = async (city, country) => {
+  const q = city ? `${city}, ${country}` : country;
+  const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(
+    q
+  )}`;
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        "User-Agent": "SafeWeather/1.0 (https://github.com/niraj-sachania/safeweather)",
+      },
+    });
+    const data = await res.json();
+    if (Array.isArray(data) && data.length > 0) {
+      return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+    }
+    return null;
+  } catch (err) {
+    console.error("Geocode error:", err);
+    return null;
   }
 };
 
@@ -94,25 +157,28 @@ const handleSearch = async () => {
   btn.disabled = true;
   clearResults();
   try {
-    const coordinates = await getCoordinates();
+    const items = await getCoordinates();
 
-    // coordinates may be an array of places or a single object
-    if (Array.isArray(coordinates)) {
-      if (coordinates.length === 1) {
-        const [only] = coordinates;
-        loadWeatherPage(only.lat, only.lon);
-        return;
-      }
-
-      // Multiple matches: render choices for user
-      renderChoices(coordinates);
+    if (!items || items.length === 0) {
+      showMessage("No locations found. Please try a different query.");
       return;
     }
 
-    // If API returned a single object with lat/lon fields
-    if (coords && coords.lat && coords.lon)
-      return loadWeatherPage(coords.lat, coords.lon);
-    showMessage("No locations found. Please try a different query.");
+    // If exactly one match, attempt to geocode immediately and load weather page
+    if (items.length === 1) {
+      const only = items[0];
+      const coords = await geocodeLocation(only.city, only.country);
+      if (coords) {
+        loadWeatherPage(coords.lat, coords.lon);
+        return;
+      } else {
+        showMessage("Found location but couldn't resolve coordinates.");
+        return;
+      }
+    }
+
+    // Multiple matches: render choices for the user to pick
+    renderChoices(items);
   } catch (err) {
     console.error("Lookup failed:", err);
     showMessage("Lookup failed. Please try again.");
@@ -132,21 +198,32 @@ const renderChoices = (items) => {
     const li = document.createElement("li");
     li.className = "search-results-item";
 
-    const btn = document.createElement("button");
-    btn.type = "button";
-    // presentational + semantic classes styled via CSS in style.css
-    btn.className = "search-result-btn btn btn-sm";
+    const choiceBtn = document.createElement("button");
+    choiceBtn.type = "button";
+    choiceBtn.className = "search-result-btn btn btn-sm";
+    choiceBtn.textContent = location.display;
 
-    const label = `${location.name}${
-      location.state ? ", " + location.state : ""
-    }${location.country ? " (" + location.country + ")" : ""}`;
-    btn.textContent = label;
-
-    btn.addEventListener("click", () => {
-      loadWeatherPage(location.lat, location.lon);
+    // When user chooses an item, geocode and navigate to weather page
+    choiceBtn.addEventListener("click", async () => {
+      // disable this button while resolving
+      choiceBtn.disabled = true;
+      showMessage("Resolving location...");
+      try {
+        const coords = await geocodeLocation(location.city, location.country);
+        if (coords) {
+          loadWeatherPage(coords.lat, coords.lon);
+        } else {
+          showMessage("Unable to resolve chosen location to coordinates.");
+        }
+      } catch (err) {
+        console.error("Choice resolution failed:", err);
+        showMessage("Failed to resolve location. Please try another.");
+      } finally {
+        choiceBtn.disabled = false;
+      }
     });
 
-    li.appendChild(btn);
+    li.appendChild(choiceBtn);
     list.appendChild(li);
   });
 
