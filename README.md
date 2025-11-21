@@ -1,6 +1,10 @@
-# Safe Weather ☀️🌧️
-
-A real-time weather application that provides intelligent clothing and safety recommendations based on current weather conditions, air quality and UV index.
+<div align="center">
+  <img src="assets/images/SafeWeatherLogo.svg" alt="Safe Weather Logo" width="200"/>
+  
+  # Safe Weather ☀️🌧️
+  
+  A real-time weather application that provides intelligent clothing and safety recommendations based on current weather conditions, air quality and UV index.
+</div>
 
 ## Features
 
@@ -12,7 +16,7 @@ A real-time weather application that provides intelligent clothing and safety re
   - Umbrella needs based on precipitation probability
   - Sun protection guidance using UV index
   - Air quality alerts and mask recommendations
-- **Location Search** - Find weather by city name or postcode
+- **Location Search** - Find weather by city name, postcode or device location
 - **Weather Icons** - Visual representation of current conditions
 - **Responsive Design** - Mobile-friendly interface using Bootstrap
 
