@@ -207,14 +207,28 @@ a {
 
 /* Weather page: Header */
 
-header a .bi-arrow-left {
-  font-size: 3rem !important;
+header a .bi-chevron-left {
+  font-size: 2rem !important;
   color: #fff;
 }
 
 header>a>i {
   font-size: 3rem !important;
   color: #fff;
+}
+
+/* Make header stretch the full width so its contents can align left
+   (body uses a centered flex layout; this forces the header to fill horizontally) */
+header {
+  width: 100%;
+  align-self: stretch;
+}
+
+/* Ensure the container in the header uses flexbox and left-aligns children */
+header .container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* Weather page: Dynamic data labels and values */
