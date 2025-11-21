@@ -4,6 +4,8 @@ import {
   renderWeatherData,
 } from "./weather-data.js";
 
+import { airQualitySanitiser } from "./utils/conversion-sanatisers.js";
+
 // Wait for initial weather data to load
 const initMap = async () => {
   // Wait a bit for the weather-data module to complete initial fetch
@@ -44,7 +46,7 @@ const initMap = async () => {
         <strong>Weather Info</strong><br>
         <strong>Temp:</strong> ${temp}°C<br>
         <strong>Conditions:</strong> ${desc}<br>
-        <strong>Air Quality Index:</strong> ${aqi}
+        <strong>Air Pollution:</strong> ${airQualitySanitiser(aqi)}
       </div>
     `;
   };
