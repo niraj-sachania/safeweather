@@ -5,16 +5,13 @@ export function formatDate(unix) {
 
 export function formatDateTime(unix) {
   const date = new Date(unix * 1000);
-  return date
-    .toLocaleString("en-GB", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    })
-    .replace(",", "");
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "pm" : "am";
+  hours = hours % 12;
+  if (hours === 0) hours = 12;
+  const mins = String(minutes).padStart(2, "0");
+  return `${hours}:${mins}${ampm}`;
 }
 
 export function isTodayCheck(date) {
