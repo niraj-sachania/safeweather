@@ -7,7 +7,7 @@ export function formatDateTime(unix) {
   const date = new Date(unix * 1000);
   let hours = date.getHours();
   const minutes = date.getMinutes();
-  const ampm = hours >= 12 ? "pm" : "am";
+  const ampm = hours >= 12 ? "PM" : "AM";
   hours = hours % 12;
   if (hours === 0) hours = 12;
   const mins = String(minutes).padStart(2, "0");
