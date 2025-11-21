@@ -205,6 +205,11 @@ a {
   outline: none;
 }
 
+.search-result-btn.selected {
+  background: rgba(255, 255, 255, 0.08);
+  outline: 2px solid rgba(0, 116, 232, 0.3);
+}
+
 /* Weather page: Header */
 
 header a .bi-arrow-left {
