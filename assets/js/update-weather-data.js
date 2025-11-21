@@ -1,9 +1,6 @@
 import { getWeatherIcon } from "./utils/weather-icons.js";
 import { formatDateTime } from "./utils/format-date.js";
-
-function airQualitySanitiser() {
-  return 1;
-}
+import { airQualitySanitiser } from "./utils/conversion-sanatisers.js";
 
 export const updateAirQualityName = (aqi) =>
   (document.querySelector("#aqi").innerHTML = airQualitySanitiser(aqi));
