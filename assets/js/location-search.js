@@ -131,6 +131,7 @@ const geocodeLocation = async (city, country) => {
     const res = await fetch(url, {
       headers: {
         Accept: "application/json",
+        "User-Agent": "SafeWeather/1.0 (https://github.com/niraj-sachania/safeweather)",
       },
     });
     const data = await res.json();
