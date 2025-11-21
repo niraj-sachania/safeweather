@@ -1,5 +1,15 @@
+import {
+  fetchCitySuggestions,
+  formatLocationSuggestion,
+} from "./autocomplete-api.js";
+
 const btn = document.querySelector("#search-btn");
 const input = document.querySelector("#city-postcode");
+
+// Autocomplete state
+let autocompleteSuggestions = [];
+let selectedSuggestionIndex = -1;
+let autocompleteDebounceTimer = null;
 
 (function initiliase() {
   // Focus the input for accessibility
@@ -17,6 +27,49 @@ const input = document.querySelector("#city-postcode");
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     handleSearch();
+  });
+
+  // Autocomplete input handler with debouncing
+  input.addEventListener("input", (e) => {
+    clearTimeout(autocompleteDebounceTimer);
+    autocompleteDebounceTimer = setTimeout(() => {
+      handleAutocomplete(e.target.value);
+    }, 300);
+  });
+
+  // Keyboard navigation for autocomplete
+  input.addEventListener("keydown", (e) => {
+    if (!resultsContainer.classList.contains("open")) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        navigateSuggestions(1);
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        navigateSuggestions(-1);
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (selectedSuggestionIndex >= 0) {
+          selectSuggestion(autocompleteSuggestions[selectedSuggestionIndex]);
+        } else {
+          handleSearch();
+        }
+        break;
+      case "Escape":
+        e.preventDefault();
+        clearAutocomplete();
+        break;
+    }
+  });
+
+  // Close autocomplete when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#search")) {
+      clearAutocomplete();
+    }
   });
 
   // Geo icon: get browser geolocation and load weather page for current position
@@ -43,6 +96,98 @@ const input = document.querySelector("#city-postcode");
     }
   });
 })();
+
+// Autocomplete functions
+
+const handleAutocomplete = async (query) => {
+  if (!query || query.trim().length < 2) {
+    clearAutocomplete();
+    return;
+  }
+
+  try {
+    const suggestions = await fetchCitySuggestions(query);
+    autocompleteSuggestions = suggestions;
+    selectedSuggestionIndex = -1;
+    renderAutocompleteSuggestions(suggestions);
+  } catch (error) {
+    console.error("Autocomplete error:", error);
+    clearAutocomplete();
+  }
+};
+
+const renderAutocompleteSuggestions = (suggestions) => {
+  clearResults();
+
+  if (!suggestions || suggestions.length === 0) {
+    return;
+  }
+
+  const list = document.createElement("ul");
+  list.className = "search-results-list autocomplete-list";
+  list.setAttribute("role", "listbox");
+
+  suggestions.forEach((location, index) => {
+    const li = document.createElement("li");
+    li.className = "search-results-item";
+    li.setAttribute("role", "option");
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "search-result-btn autocomplete-item";
+    button.textContent = formatLocationSuggestion(location);
+    button.dataset.index = index;
+
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      selectSuggestion(location);
+    });
+
+    // Touch support
+    button.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      selectSuggestion(location);
+    });
+
+    li.appendChild(button);
+    list.appendChild(li);
+  });
+
+  resultsContainer.appendChild(list);
+  resultsContainer.classList.add("open");
+};
+
+const navigateSuggestions = (direction) => {
+  const maxIndex = autocompleteSuggestions.length - 1;
+  selectedSuggestionIndex = Math.max(
+    -1,
+    Math.min(maxIndex, selectedSuggestionIndex + direction)
+  );
+
+  // Update visual selection
+  const items = resultsContainer.querySelectorAll(".autocomplete-item");
+  items.forEach((item, index) => {
+    if (index === selectedSuggestionIndex) {
+      item.classList.add("selected");
+      item.setAttribute("aria-selected", "true");
+    } else {
+      item.classList.remove("selected");
+      item.setAttribute("aria-selected", "false");
+    }
+  });
+};
+
+const selectSuggestion = (location) => {
+  input.value = location.name;
+  clearAutocomplete();
+  loadWeatherPage(location.lat, location.lon);
+};
+
+const clearAutocomplete = () => {
+  clearResults();
+  autocompleteSuggestions = [];
+  selectedSuggestionIndex = -1;
+};
 
 // Generic functions
 
