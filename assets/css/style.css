@@ -11,6 +11,25 @@
   --surface-2: #05203a;
   /* slightly darker surface */
   --card-border: #123852;
+  
+  /* Align the contents of the right column to the right on large screens */
+  .right-col {
+    text-align: right;
+    align-items: stretch; /* allow children to use full height */
+  }
+
+  /* Override bootstrap centering utilities so inner content sits at the right */
+  .right-col > .new-box,
+  .right-col > .weather-icon-box {
+    justify-content: flex-end;
+    align-items: center;
+    display: flex;
+  }
+
+  /* Ensure temp text aligns right inside its container */
+  .right-col #temp {
+    text-align: right;
+  }
   --search-placeholder-color: #ffffff8c;
 }
 
@@ -256,26 +275,14 @@ span.data-value {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.new-box {
-  background-color: #232e3e;
-  padding: 1.5rem;
-  text-align: center;
-  border-radius: 12px;
-  min-height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-}
-
 .time-box {
-  min-height: 100px;
-  font-size: 1.5rem;
+  font-size: 3rem;
+  font-weight: 600;
 }
 
 
 .location-name {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -318,18 +325,30 @@ span.data-value {
   min-height: 120px;
   font-size: 2rem;
   font-weight: bold;
+  text-align: center  ;
 }
 
 .weather-icon-box {
-  min-height: 157px;
-  font-size: 5rem;
-  background-color: #232e3e;
-  border-radius: 12px;
+  /* Default icon size can be overridden with --icon-size. The box does
+    not force a fixed height or clip the icon; padding is preserved. */
+  --icon-size: 15rem; /* adjust this or override per element */
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 12px;
   background-color: transparent;
 }
+
+/* The actual icon (emoji/text) — this controls visual size */
+.weather-icon-box > #weather-icon-box {
+  display: inline-block;
+  text-align: center;
+  line-height: 1;
+  /* By default the icon uses --icon-size but you can override with
+     a direct font-size on the span if you want a different value. */
+  font-size: var(--icon-size, 12rem);
+}
+
 
 /* Weather page: Interactive map */
 
@@ -340,6 +359,30 @@ span.data-value {
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
   background-color: #232e3e;
+}
+
+/* Desktop: make right-column children take equal halves and keep inner content centered */
+@media (min-width: 992px) {
+  .right-col > .weather-icon-box {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+
+
+@media (min-width: 992px) {
+  .degrees-box {
+    position: relative; /* positioning context for absolute child */
+  }
+
+  .degrees-box #temp {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+    transform: none;
+    text-align: right;
+  }
 }
 
 /* Weather page: Forecast section */
