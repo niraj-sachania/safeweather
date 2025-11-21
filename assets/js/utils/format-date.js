@@ -11,7 +11,7 @@ export function formatDateTime(unix) {
   hours = hours % 12;
   if (hours === 0) hours = 12;
   const mins = String(minutes).padStart(2, "0");
-  return `${hours}:${mins}${ampm}`;
+  return `${hours}:${mins} ${ampm}`;
 }
 
 export function isTodayCheck(date) {
