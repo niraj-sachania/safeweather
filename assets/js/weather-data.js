@@ -38,13 +38,14 @@ export const getWeatherData = async (lat, lon) => {
 // Export function to get current weather data without re-fetching
 export const getCurrentWeatherData = () => currentWeatherData;
 
-const populateElement = (label, divId, data) => {
+const populateElement = (label, divId, data, units) => {
   const element = document.getElementById(divId);
   if (!element) return;
-  const content = `<span class="data-value">${data.current[divId]}</span>`;
+  const value = data.current[divId] ?? "";
+  const content = `<span class="data-value">${value}${units || ""}</span>`;
 
   const htmlString = label
-    ? `<span class="data-label">${label}</span> ${content}`
+    ? `<span class="data-label">${label}</span> ${content}<span>`
     : content;
 
   element.innerHTML = htmlString;
@@ -58,8 +59,9 @@ export function renderWeatherData(data) {
 
   dynamicElements.forEach((element) => {
     const value = element.getAttribute("data-label");
+    const units = element.getAttribute("data-units");
     const key = element.id;
-    populateElement(value, key, data);
+    populateElement(value, key, data, units);
   });
 
   console.log("Rendered weather data:", data);
