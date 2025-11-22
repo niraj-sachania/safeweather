@@ -29,128 +29,149 @@
   </header>
 
   <main class="container py-4">
-    <!-- Main Weather Grid: 2 columns on desktop, stacked on mobile -->
-    <div class="row g-3 py-5 mb-3">
+    <!-- Loading State (visible by default) -->
+    <div id="loading-state" class="text-center py-5">
+      <div class="loading-spinner mb-3"></div>
+      <p class="text-white-50">Getting real time weather data...</p>
+    </div>
 
-      <!-- Left Column: Time, Location Name, Rain Coverage -->
-      <div class="col-12 col-lg-6 d-flex flex-column order-1 order-lg-1 mt-4">
-        <!-- Time -->
-        <div class="time-box m-0">
-          <div id="dateTime"></div>
-        </div>
-
-        <!-- Location Name -->
-        <div class="location-name p-0 m-0">
-          <div id="location-name"></div>
-        </div>
-
-        <!-- Rain Coverage % -->
-        <div class="rain-coverage-box p-0 m-0">
-          <div>Rain Coverage: <span class="rain-coverage-value"></span>%</div>
-        </div>
+    <!-- Error State (hidden by default) -->
+    <div id="error-state" class="d-none text-center py-5">
+      <div class="mb-3">
+        <i class="bi bi-exclamation-triangle" style="font-size: 3rem; color: #ff9c00;"></i>
       </div>
+      <h3 class="text-white mb-3">Unable to Load Weather Data</h3>
+      <p class="text-white-50 mb-3" id="error-message">There was a problem fetching the weather data. Please try again
+        later.</p>
+      <a href="index.html" class="btn btn-primary">Back to Home</a>
+    </div>
 
-      <div
-        class="col-12 col-lg-6 d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-center justify-content-lg-end right-col order-3 order-lg-2 mt-0">
-        <!-- Degrees °C -->
+    <!-- All weather content (hidden by default to prevent FOUT/FLOUT) -->
+    <div id="weather-content" class="d-none">
+
+      <!-- Main Weather Grid: 2 columns on desktop, stacked on mobile -->
+      <div class="row g-3 py-5 mb-3">
+        <!-- Left Column: Time, Location Name, Rain Coverage -->
+        <div class="col-12 col-lg-6 d-flex flex-column order-1 order-lg-1 mt-4">
+          <!-- Time -->
+          <div class="time-box m-0">
+            <div id="dateTime"></div>
+          </div>
+
+          <!-- Location Name -->
+          <div class="location-name p-0 m-0">
+            <div id="location-name"></div>
+          </div>
+
+          <!-- Rain Coverage % -->
+          <div class="rain-coverage-box p-0 m-0">
+            <div>Rain Coverage: <span class="rain-coverage-value"></span>%</div>
+          </div>
+        </div>
+
         <div
-          class="degrees-box pe-lg-4 mb-3 pt-0 order-2 order-lg-1 position-relative d-flex justify-content-center justify-content-lg-end align-items-start ms-lg-auto mt-5">
-          <div id="temp" class="text-center text-lg-end" data-label data-units="°C"></div>
+          class="col-12 col-lg-6 d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-center justify-content-lg-end right-col order-3 order-lg-2 mt-0">
+          <!-- Degrees °C -->
+          <div
+            class="degrees-box pe-lg-4 mb-3 pt-0 order-2 order-lg-1 position-relative d-flex justify-content-center justify-content-lg-end align-items-start ms-lg-auto mt-5">
+            <div id="temp" class="text-center text-lg-end" data-label data-units="°C"></div>
+          </div>
+
+          <!-- Weather Icon (larger) -->
+          <div
+            class="weather-icon-box order-1 order-lg-2 d-flex justify-content-center justify-content-lg-end align-items-center p-xs-3">
+            <span id="weather-icon-box"></span>
+          </div>
         </div>
 
-        <!-- Weather Icon (larger) -->
-        <div
-          class="weather-icon-box order-1 order-lg-2 d-flex justify-content-center justify-content-lg-end align-items-center p-xs-3">
-          <span id="weather-icon-box"></span>
-        </div>
       </div>
 
-    </div>
+      <!-- Weather Details Grid: 2x2 on mobile, 4 across on desktop -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">Air Pollution</span>
+              <span class="data-value" id="aqi"></span>
+            </div>
+          </div>
+        </div>
 
-    <!-- Weather Details Grid: 2x2 on mobile, 4 across on desktop -->
-    <div class=" row g-3 mb-4">
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">Air Pollution</span>
-            <span class="data-value" id="aqi"></span>
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <div id="humidity" data-label="Humidity" data-units="%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span id="wind_speed" data-label="Wind speed" data-units=" km/h"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">UV Index</span>
+              <span class="data-value" id="uvi"></span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <div id="humidity" data-label="Humidity" data-units="%"></div>
+      <!-- Recommendations Grid: 2x2 on mobile, 4 across on desktop -->
+      <div class="row g-3 mb-4">
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">Wear a coat?</span>
+              <span class="data-value" id="coat"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">Bring an Umbrella?</span>
+              <span class="data-value" id="umbrella"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">Is the sun safe?</span>
+              <span class="data-value" id="sun"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-lg-3">
+          <div class="card bg-dark text-white border-0 h-100">
+            <div class="card-body text-left ps-4">
+              <span class="data-label">Is the Air Safe?</span>
+              <span class="data-value" id="air"></span>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span id="wind_speed" data-label="Wind speed" data-units=" km/h"></span>
-          </div>
-        </div>
+      <!-- Interactive Map -->
+      <div id="interactive-map" class="mb-4"></div>
+
+      <!-- 7-Day Forecast Section -->
+      <h3 id="forecast-label" class="text-white text-center mb-3">Forecast</h3>
+      <div id="forecast" class="mb-4">
+        <!-- Cards injected here -->
       </div>
 
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">UV Index</span>
-            <span class="data-value" id="uvi"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Recommendations Grid: 2x2 on mobile, 4 across on desktop -->
-    <div class="row g-3 mb-4">
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">Wear a coat?</span>
-            <span class="data-value" id="coat"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">Bring an Umbrella?</span>
-            <span class="data-value" id="umbrella"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">Is the sun safe?</span>
-            <span class="data-value" id="sun"></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-6 col-lg-3">
-        <div class="card bg-dark text-white border-0 h-100">
-          <div class="card-body text-left ps-4">
-            <span class="data-label">Is the Air Safe?</span>
-            <span class="data-value" id="air"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Interactive Map -->
-    <div id="interactive-map" class="mb-4"></div>
-
-    <!-- 7-Day Forecast Section -->
-    <h3 id="forecast-label" class="text-white text-center mb-3">Forecast</h3>
-    <div id="forecast" class="mb-4">
-      <!-- Cards injected here -->
-    </div>
+    </div> <!-- Close weather-content -->
   </main>
 
   <button id="scrollToTop" class="btn btn-secondary position-fixed bottom-0 end-0 m-3 rounded-circle"
@@ -158,7 +179,7 @@
     <i class="bi bi-arrow-up"></i>
   </button>
 
-  <footer class="mt-5 py-4 text-center">
+  <footer id="weather-footer" class="d-none mt-5 py-4 text-center">
     <div class="container">
       <p class="mb-1 text-white-50">&copy; 2025 Safe Weather</p>
       <p class="mb-0 small text-white-50">Weather data provided by <a href="https://openweathermap.org/" target="_blank"
