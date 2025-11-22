@@ -11,25 +11,6 @@
   --surface-2: #05203a;
   /* slightly darker surface */
   --card-border: #123852;
-
-  /* Align the contents of the right column to the right on large screens */
-  .right-col {
-    text-align: right;
-    align-items: stretch; /* allow children to use full height */
-  }
-
-  /* Override bootstrap centering utilities so inner content sits at the right */
-  .right-col > .new-box,
-  .right-col > .weather-icon-box {
-    justify-content: flex-end;
-    align-items: center;
-    display: flex;
-  }
-
-  /* Ensure temp text aligns right inside its container */
-  .right-col #temp {
-    text-align: right;
-  }
   --search-placeholder-color: #ffffff8c;
 }
 
@@ -269,6 +250,25 @@ span.data-value {
 
 /* Weather page: Cards - Bootstrap overrides */
 
+/* Align the contents of the right column to the right on large screens */
+.right-col {
+  text-align: right;
+  align-items: stretch; /* allow children to use full height */
+}
+
+/* Override bootstrap centering utilities so inner content sits at the right */
+.right-col > .new-box,
+.right-col > .weather-icon-box {
+  justify-content: flex-end;
+  align-items: center;
+  display: flex;
+}
+
+/* Ensure temp text aligns right inside its container */
+.right-col #temp {
+  text-align: right;
+}
+
 .card.bg-dark {
   background-color: #232e3e !important;
   border-radius: 12px;
@@ -368,7 +368,7 @@ span.data-value {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  overflow-x: none;
+  overflow-x: hidden;
 }
 
 #forecast .card {
