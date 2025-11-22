@@ -80,6 +80,18 @@ if (!resultsContainer) {
         : (btn.disabled = false);
     }
   });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    const isClickInside =
+      searchWrapper?.contains(e.target) || resultsContainer?.contains(e.target);
+    !isClickInside && clearResults();
+  });
+
+  // Close dropdown when pressing ESC anywhere on the page
+  document.addEventListener("keydown", (e) => {
+    e.key === "Escape" && clearResults();
+  });
 })();
 
 // Generic functions
