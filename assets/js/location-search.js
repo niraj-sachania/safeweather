@@ -1,5 +1,25 @@
+import { getQueryParams } from "./utils/url-params.js";
+
 const btn = document.querySelector("#search-btn");
 const input = document.querySelector("#city-postcode");
+
+// Create a dropdown under the input to show multiple coordinate choices
+let resultsContainer = document.getElementById("search-results");
+const searchWrapper = document.querySelector("#search .d-flex");
+if (!resultsContainer) {
+  resultsContainer = document.createElement("div");
+  resultsContainer.id = "search-results";
+  resultsContainer.className = "search-results";
+  // Append to the inline search wrapper so we can position absolute relative to it
+  if (searchWrapper) {
+    // ensure the container that will be used as positioning context is positioned
+    searchWrapper.style.position = searchWrapper.style.position || "relative";
+    searchWrapper.appendChild(resultsContainer);
+  } else {
+    const searchEl = document.getElementById("search");
+    if (searchEl) searchEl.appendChild(resultsContainer);
+  }
+}
 
 (function initiliase() {
   // Focus the input for accessibility
@@ -59,9 +79,8 @@ const showMessage = (text) => {
 // Weather app functions
 
 const getCityOrPostcode = () => {
-  const queryString = window.location.search;
-  const searchParams = new URLSearchParams(queryString);
-  const cityOrPostcode = input.value || searchParams.get("cityOrPostcode");
+  const params = getQueryParams();
+  const cityOrPostcode = input.value || params.cityOrPostcode;
   return cityOrPostcode;
 };
 
@@ -110,8 +129,8 @@ const handleSearch = async () => {
     }
 
     // If API returned a single object with lat/lon fields
-    if (coords && coords.lat && coords.lon)
-      return loadWeatherPage(coords.lat, coords.lon);
+    if (coordinates && coordinates.lat && coordinates.lon)
+      return loadWeatherPage(coordinates.lat, coordinates.lon);
     showMessage("No locations found. Please try a different query.");
   } catch (err) {
     console.error("Lookup failed:", err);
@@ -153,21 +172,3 @@ const renderChoices = (items) => {
   resultsContainer.appendChild(list);
   resultsContainer.classList.add("open");
 };
-
-// Create a dropdown under the input to show multiple coordinate choices
-let resultsContainer = document.getElementById("search-results");
-const searchWrapper = document.querySelector("#search .d-flex");
-if (!resultsContainer) {
-  resultsContainer = document.createElement("div");
-  resultsContainer.id = "search-results";
-  resultsContainer.className = "search-results";
-  // Append to the inline search wrapper so we can position absolute relative to it
-  if (searchWrapper) {
-    // ensure the container that will be used as positioning context is positioned
-    searchWrapper.style.position = searchWrapper.style.position || "relative";
-    searchWrapper.appendChild(resultsContainer);
-  } else {
-    const searchEl = document.getElementById("search");
-    if (searchEl) searchEl.appendChild(resultsContainer);
-  }
-}

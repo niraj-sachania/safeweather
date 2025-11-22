@@ -4,6 +4,10 @@ import {
   renderWeatherData,
 } from "./weather-data.js";
 
+import { updateQueryParams } from "./utils/url-params.js";
+import { updateLocationName } from "./update-location-data.js";
+import { formatDateTime } from "./utils/format-date.js";
+
 // Wait for initial weather data to load
 const initMap = async () => {
   // Wait a bit for the weather-data module to complete initial fetch
@@ -35,16 +39,38 @@ const initMap = async () => {
   // Create popup content
   const createPopupContent = (weatherData) => {
     const temp = weatherData?.current?.temp ?? "N/A";
-    const desc =
+    const feelsLike = weatherData?.current?.feels_like ?? "N/A";
+
+    // Capitalize first letter of description
+    const rawDesc =
       weatherData?.current?.weather?.[0]?.description ?? "No description";
+    const desc = rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
+
     const aqi = weatherData?.airPollution?.[0]?.aqi ?? "N/A";
+
+    // Convert visibility from meters to km
+    const visibilityMeters = weatherData?.current?.visibility;
+    const visibility = visibilityMeters
+      ? (visibilityMeters / 1000).toFixed(1)
+      : "N/A";
+
+    // Format sunrise and sunset times using the same util as homepage
+    const sunrise = weatherData?.current?.sunrise
+      ? formatDateTime(weatherData.current.sunrise)
+      : "N/A";
+    const sunset = weatherData?.current?.sunset
+      ? formatDateTime(weatherData.current.sunset)
+      : "N/A";
 
     return `
       <div style="color: #000; text-align: left;">
         <strong>Weather Info</strong><br>
-        <strong>Temp:</strong> ${temp}°C<br>
+        <strong>Temperature:</strong> ${temp}°C<br>
+        <strong>Feels Like:</strong> ${feelsLike}°C<br>
         <strong>Conditions:</strong> ${desc}<br>
-        <strong>Air Quality Index:</strong> ${aqi}
+        <strong>Visibility:</strong> ${visibility} km<br>
+        <strong>Sunrise:</strong> ${sunrise}<br>
+        <strong>Sunset:</strong> ${sunset}<br>
       </div>
     `;
   };
@@ -71,11 +97,15 @@ const initMap = async () => {
       marker = L.marker([clickedLat, clickedLon]).addTo(map);
       marker.bindPopup(createPopupContent(newData)).openPopup();
 
-      // Update URL with new coordinates
-      const url = new URL(window.location);
-      url.searchParams.set("lat", clickedLat);
-      url.searchParams.set("lon", clickedLon);
-      window.history.pushState({}, "", url);
+      // Update URL with new coordinates (remove cityOrPostcode since we're using coords)
+      updateQueryParams({
+        lat: clickedLat,
+        lon: clickedLon,
+        cityOrPostcode: null,
+      });
+
+      // Update the location name display
+      updateLocationName();
     } catch (error) {
       console.error("Error fetching weather for clicked location:", error);
       alert(

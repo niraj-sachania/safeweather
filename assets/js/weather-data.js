@@ -7,6 +7,8 @@ import {
   dateTime,
 } from "./update-weather-data.js";
 import { updateWeatherIcon } from "./update-weather-data.js";
+import { updateLocationName } from "./update-location-data.js";
+import { getQueryParams } from "./utils/url-params.js";
 
 // Store the current weather data globally for map to access without re-fetching
 let currentWeatherData = null;
@@ -15,10 +17,9 @@ let currentWeatherData = null;
 export const getWeatherData = async (lat, lon) => {
   // If lat/lon not provided, try query parameters
   if (!lat || !lon) {
-    const queryString = window.location.search;
-    const searchParams = new URLSearchParams(queryString);
-    lat = searchParams.get("lat");
-    lon = searchParams.get("lon");
+    const params = getQueryParams();
+    lat = params.lat;
+    lon = params.lon;
   }
 
   try {
@@ -43,7 +44,7 @@ const populateElement = (label, divId, data, units) => {
   if (!element) return;
   let value = data.current[divId] ?? "";
 
-  if (divId === "temp") value = parseInt(value);
+  if (divId === "temp") value = Math.round(value);
   const content = `<span class="data-value">${value}${units || ""}</span>`;
 
   const htmlString = label
@@ -66,8 +67,6 @@ export function renderWeatherData(data) {
     populateElement(value, key, data, units);
   });
 
-  console.log("Rendered weather data:", data);
-
   updateWeatherIcon(data.forecast);
   updateAllRecs(data);
   createForecastSection(data.forecast);
@@ -75,6 +74,7 @@ export function renderWeatherData(data) {
   updateAirQualityName(data.airPollution[0].aqi);
   updateUvIndex(data.current.uvi);
   dateTime(data.current.dt);
+  updateLocationName();
 }
 
 // Get weather data from our secure proxy server (initial load)
