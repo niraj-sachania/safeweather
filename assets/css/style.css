@@ -426,12 +426,36 @@ span.data-value {
   height: 50px;
 }
 
-/* Footer GitHub icon */
+/* Footer styles */
 
-footer.fixed-bottom {
-  z-index: -1; /* prevent footer overlapping the search content for small screens */
+/* Default: footer is not fixed */
+#homepage-footer {
+  position: relative;
 }
 
+/* For screens up to 915px width: apply fixed-bottom only when height > 520px */
+@media (max-width: 915px) and (min-height: 521px) {
+  #homepage-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+/* For screens over 915px width: apply fixed-bottom only when height > 820px */
+@media (min-width: 916px) and (min-height: 821px) {
+  #homepage-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+/* Footer GitHub icon */
 footer .bi-github {
   font-size: 2rem;
 }
