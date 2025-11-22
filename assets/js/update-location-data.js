@@ -25,8 +25,3 @@ export function updateLocationName() {
     locationElement.textContent = "Unknown Location";
   }
 }
-
-function updateCurrentTime() {
-  // Get current time from geocoding API
-  // Update current time card
-}
