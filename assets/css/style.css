@@ -269,6 +269,10 @@ span.data-value {
   text-align: right;
 }
 
+.right-col #temp > span{
+  font-size: 2.5rem;
+}
+
 .card.bg-dark {
   background-color: #232e3e !important;
   border-radius: 12px;
