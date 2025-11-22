@@ -90,7 +90,10 @@ if (!resultsContainer) {
 
   // Close dropdown when pressing ESC anywhere on the page
   document.addEventListener("keydown", (e) => {
-    e.key === "Escape" && clearResults();
+    if (e.key === "Escape") {
+      clearResults();
+      input?.focus();
+    }
   });
 })();
 
