@@ -23,7 +23,7 @@ if (!resultsContainer) {
 
 (function initiliase() {
   // Focus the input for accessibility
-  //   if (input) input.focus();
+  if (input) input.focus();
 
   // Allow pressing Enter in the input to trigger the search
   input.addEventListener("keydown", (e) => {
