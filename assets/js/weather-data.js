@@ -9,6 +9,11 @@ import {
 import { updateWeatherIcon } from "./update-weather-data.js";
 import { updateLocationName } from "./update-location-data.js";
 import { getQueryParams } from "./utils/url-params.js";
+import {
+  showLoadingState,
+  showWeatherContent,
+  showErrorState,
+} from "./loading-state.js";
 
 // Store the current weather data globally for map to access without re-fetching
 let currentWeatherData = null;
@@ -79,6 +84,15 @@ export function renderWeatherData(data) {
 
 // Get weather data from our secure proxy server (initial load)
 (async () => {
-  const data = await getWeatherData();
-  renderWeatherData(data);
+  try {
+    showLoadingState();
+    const data = await getWeatherData();
+    renderWeatherData(data);
+    showWeatherContent();
+  } catch (error) {
+    console.error("Failed to load weather data:", error);
+    showErrorState(
+      "There was a problem fetching the weather data. Please check your connection and try again."
+    );
+  }
 })();

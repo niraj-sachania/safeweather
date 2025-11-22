@@ -23,13 +23,28 @@ if (!resultsContainer) {
 
 (function initiliase() {
   // Focus the input for accessibility
-  if (input) input.focus();
+  input && input.focus();
+
+  // Enable/disable search button based on input value
+  const updateButtonState = () => {
+    const hasValue = input && input.value && input.value.trim().length > 0;
+    btn && (btn.disabled = !hasValue);
+  };
+
+  // Make it globally accessible for other functions
+  window.updateButtonState = updateButtonState;
+
+  // Check initial state
+  updateButtonState();
+
+  // Update button state on input
+  input && input.addEventListener("input", updateButtonState);
 
   // Allow pressing Enter in the input to trigger the search
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSearch();
+      input.value.trim() && handleSearch();
     }
   });
 
@@ -59,8 +74,23 @@ if (!resultsContainer) {
         "Unable to detect location. Please allow location access or use the search."
       );
     } finally {
-      btn.disabled = false;
+      // Re-enable button only if input has value
+      window.updateButtonState
+        ? window.updateButtonState()
+        : (btn.disabled = false);
     }
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", (e) => {
+    const isClickInside =
+      searchWrapper?.contains(e.target) || resultsContainer?.contains(e.target);
+    !isClickInside && clearResults();
+  });
+
+  // Close dropdown when pressing ESC anywhere on the page
+  document.addEventListener("keydown", (e) => {
+    e.key === "Escape" && clearResults();
   });
 })();
 
@@ -136,13 +166,16 @@ const handleSearch = async () => {
     console.error("Lookup failed:", err);
     showMessage("Lookup failed. Please try again.");
   } finally {
-    btn.disabled = false;
+    // Re-enable button only if input has value
+    window.updateButtonState
+      ? window.updateButtonState()
+      : (btn.disabled = false);
   }
 };
 
 const renderChoices = (items) => {
   clearResults();
-  if (!items || items.length === 0) return;
+  if (!items?.length) return;
 
   const list = document.createElement("ul");
   list.className = "search-results-list";

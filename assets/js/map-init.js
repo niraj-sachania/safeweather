@@ -90,9 +90,7 @@ const initMap = async () => {
       renderWeatherData(newData);
 
       // Remove old marker and add new one
-      if (marker) {
-        map.removeLayer(marker);
-      }
+      marker && map.removeLayer(marker);
 
       marker = L.marker([clickedLat, clickedLon]).addTo(map);
       marker.bindPopup(createPopupContent(newData)).openPopup();
@@ -116,8 +114,6 @@ const initMap = async () => {
 };
 
 // Initialize map when DOM is ready
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initMap);
-} else {
-  initMap();
-}
+document.readyState === "loading"
+  ? document.addEventListener("DOMContentLoaded", initMap)
+  : initMap();
