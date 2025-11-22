@@ -8,9 +8,10 @@
 
 ![Safe Weather Application](docs/website.png)
 
+**Live Site**: [Github Pages](https://niraj-sachania.github.io/safeweather/) | **User Stories**: [Project Board](https://github.com/users/niraj-sachania/projects/8) | **UX Design**: [Miro Board](https://miro.com/app/board/uXjVJp0Hlv8=/?share_link_id=951899658915)
+
 ## Table of Contents
 
-- [Project Links](#project-links)
 - [Features](#features)
 - [Design](#design)
   - [Wireframes](#wireframes)
@@ -29,12 +30,6 @@
   - [Impact on Development](#impact-on-development)
 - [Team Contributions](#team-contributions)
 - [Data Sources](#data-sources)
-
-## Project Links
-
-- **Live Site**: [https://github.com/niraj-sachania/safeweather](https://github.com/niraj-sachania/safeweather)
-- **User Stories**: [Project Board](https://github.com/users/niraj-sachania/projects/8)
-- **UX Design**: [Miro Board](https://miro.com/app/board/uXjVJp0Hlv8=/?share_link_id=951899658915)
 
 ## Features
 
@@ -239,11 +234,11 @@ AI augmentation enabled an efficient workflow throughout the project, accelerati
 
 ## Team Contributions
 
-- **Louie** - Weather page HTML - [GitHub](https://github.com/LHcode2025)
-- **Mike** - User stories - [LinkedIn](https://www.linkedin.com/in/michael-awanayah-851615128) | [GitHub](https://github.com/mikendab)
-- **Niraj** - Led API integration and development (inc. proxy server configuration) - [LinkedIn](https://www.linkedin.com/in/niraj-sachania/) | [GitHub](https://github.com/niraj-sachania)
-- **Rob** - Led UX design (inc. colour schemes, wireframes) - [LinkedIn](https://www.linkedin.com/in/robertallanfraser/) | [GitHub](https://github.com/RealTimeBasecamp)
-- **Sheena** - Weather forecast component - [LinkedIn](https://www.linkedin.com/in/sheena-anto-3a9720282) | [GitHub](https://github.com/sheenaanto)
+- **Louie** - Developed the initial front end of the weather page from the wireframe - [GitHub](https://github.com/LHcode2025)
+- **Mike** - Generated user stories and added to project board - [LinkedIn](https://www.linkedin.com/in/michael-awanayah-851615128) | [GitHub](https://github.com/mikendab)
+- **Niraj** - Led API integration, testing and development (inc. proxy server configuration) - [LinkedIn](https://www.linkedin.com/in/niraj-sachania/) | [GitHub](https://github.com/niraj-sachania)
+- **Rob** - Led UX design and development (inc. logo creation in Photoshop, colour schemes, wireframes) - [LinkedIn](https://www.linkedin.com/in/robertallanfraser/) | [GitHub](https://github.com/RealTimeBasecamp)
+- **Sheena** - Developed weather forecast component and supported testing - [LinkedIn](https://www.linkedin.com/in/sheena-anto-3a9720282) | [GitHub](https://github.com/sheenaanto)
 
 ## Data Sources
 
