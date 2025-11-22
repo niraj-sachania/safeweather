@@ -25,11 +25,28 @@ if (!resultsContainer) {
   // Focus the input for accessibility
   if (input) input.focus();
 
+  // Enable/disable search button based on input value
+  const updateButtonState = () => {
+    const hasValue = input && input.value && input.value.trim().length > 0;
+    if (btn) {
+      btn.disabled = !hasValue;
+    }
+  };
+
+  // Make it globally accessible for other functions
+  window.updateButtonState = updateButtonState;
+
+  // Check initial state
+  updateButtonState();
+
+  // Update button state on input
+  if (input) input.addEventListener("input", updateButtonState);
+
   // Allow pressing Enter in the input to trigger the search
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSearch();
+      if (input.value.trim()) handleSearch();
     }
   });
 
@@ -59,7 +76,12 @@ if (!resultsContainer) {
         "Unable to detect location. Please allow location access or use the search."
       );
     } finally {
-      btn.disabled = false;
+      // Re-enable button only if input has value
+      if (window.updateButtonState) {
+        window.updateButtonState();
+      } else {
+        btn.disabled = false;
+      }
     }
   });
 })();
@@ -136,7 +158,12 @@ const handleSearch = async () => {
     console.error("Lookup failed:", err);
     showMessage("Lookup failed. Please try again.");
   } finally {
-    btn.disabled = false;
+    // Re-enable button only if input has value
+    if (window.updateButtonState) {
+      window.updateButtonState();
+    } else {
+      btn.disabled = false;
+    }
   }
 };
 
