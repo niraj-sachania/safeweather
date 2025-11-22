@@ -58,10 +58,11 @@ const showMessage = (text) => {
 
 // Weather app functions
 
+import { getQueryParams } from "./utils/url-params.js";
+
 const getCityOrPostcode = () => {
-  const queryString = window.location.search;
-  const searchParams = new URLSearchParams(queryString);
-  const cityOrPostcode = input.value || searchParams.get("cityOrPostcode");
+  const params = getQueryParams();
+  const cityOrPostcode = input.value || params.cityOrPostcode;
   return cityOrPostcode;
 };
 

@@ -5,6 +5,8 @@ import {
 } from "./weather-data.js";
 
 import { airQualitySanitiser } from "./utils/conversion-sanatisers.js";
+import { updateQueryParams } from "./utils/url-params.js";
+import { updateLocationName } from "./update-location-data.js";
 
 // Wait for initial weather data to load
 const initMap = async () => {
@@ -73,11 +75,15 @@ const initMap = async () => {
       marker = L.marker([clickedLat, clickedLon]).addTo(map);
       marker.bindPopup(createPopupContent(newData)).openPopup();
 
-      // Update URL with new coordinates
-      const url = new URL(window.location);
-      url.searchParams.set("lat", clickedLat);
-      url.searchParams.set("lon", clickedLon);
-      window.history.pushState({}, "", url);
+      // Update URL with new coordinates (remove cityOrPostcode since we're using coords)
+      updateQueryParams({
+        lat: clickedLat,
+        lon: clickedLon,
+        cityOrPostcode: null,
+      });
+
+      // Update the location name display
+      updateLocationName();
     } catch (error) {
       console.error("Error fetching weather for clicked location:", error);
       alert(
