@@ -48,7 +48,7 @@ a {
   height: 200px;
 }
 
-@media (min-width: 915px) {
+@media (min-width: 916px) {
   .homepage-logo {
     width: 512px;
     height: 512px;
