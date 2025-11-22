@@ -23,14 +23,12 @@ if (!resultsContainer) {
 
 (function initiliase() {
   // Focus the input for accessibility
-  if (input) input.focus();
+  input && input.focus();
 
   // Enable/disable search button based on input value
   const updateButtonState = () => {
     const hasValue = input && input.value && input.value.trim().length > 0;
-    if (btn) {
-      btn.disabled = !hasValue;
-    }
+    btn && (btn.disabled = !hasValue);
   };
 
   // Make it globally accessible for other functions
@@ -40,13 +38,13 @@ if (!resultsContainer) {
   updateButtonState();
 
   // Update button state on input
-  if (input) input.addEventListener("input", updateButtonState);
+  input && input.addEventListener("input", updateButtonState);
 
   // Allow pressing Enter in the input to trigger the search
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (input.value.trim()) handleSearch();
+      input.value.trim() && handleSearch();
     }
   });
 
@@ -77,11 +75,9 @@ if (!resultsContainer) {
       );
     } finally {
       // Re-enable button only if input has value
-      if (window.updateButtonState) {
-        window.updateButtonState();
-      } else {
-        btn.disabled = false;
-      }
+      window.updateButtonState
+        ? window.updateButtonState()
+        : (btn.disabled = false);
     }
   });
 })();
@@ -159,17 +155,15 @@ const handleSearch = async () => {
     showMessage("Lookup failed. Please try again.");
   } finally {
     // Re-enable button only if input has value
-    if (window.updateButtonState) {
-      window.updateButtonState();
-    } else {
-      btn.disabled = false;
-    }
+    window.updateButtonState
+      ? window.updateButtonState()
+      : (btn.disabled = false);
   }
 };
 
 const renderChoices = (items) => {
   clearResults();
-  if (!items || items.length === 0) return;
+  if (!items?.length) return;
 
   const list = document.createElement("ul");
   list.className = "search-results-list";
