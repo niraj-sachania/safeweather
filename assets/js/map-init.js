@@ -4,9 +4,9 @@ import {
   renderWeatherData,
 } from "./weather-data.js";
 
-import { airQualitySanitiser } from "./utils/conversion-sanatisers.js";
 import { updateQueryParams } from "./utils/url-params.js";
 import { updateLocationName } from "./update-location-data.js";
+import { formatDateTime } from "./utils/format-date.js";
 
 // Wait for initial weather data to load
 const initMap = async () => {
@@ -38,17 +38,40 @@ const initMap = async () => {
 
   // Create popup content
   const createPopupContent = (weatherData) => {
+    console.log(weatherData);
     const temp = weatherData?.current?.temp ?? "N/A";
-    const desc =
+    const feelsLike = weatherData?.current?.feels_like ?? "N/A";
+
+    // Capitalize first letter of description
+    const rawDesc =
       weatherData?.current?.weather?.[0]?.description ?? "No description";
+    const desc = rawDesc.charAt(0).toUpperCase() + rawDesc.slice(1);
+
     const aqi = weatherData?.airPollution?.[0]?.aqi ?? "N/A";
+
+    // Convert visibility from meters to km
+    const visibilityMeters = weatherData?.current?.visibility;
+    const visibility = visibilityMeters
+      ? (visibilityMeters / 1000).toFixed(1)
+      : "N/A";
+
+    // Format sunrise and sunset times using the same util as homepage
+    const sunrise = weatherData?.current?.sunrise
+      ? formatDateTime(weatherData.current.sunrise)
+      : "N/A";
+    const sunset = weatherData?.current?.sunset
+      ? formatDateTime(weatherData.current.sunset)
+      : "N/A";
 
     return `
       <div style="color: #000; text-align: left;">
         <strong>Weather Info</strong><br>
-        <strong>Temp:</strong> ${temp}°C<br>
+        <strong>Temperature:</strong> ${temp}°C<br>
+        <strong>Feels Like:</strong> ${feelsLike}°C<br>
         <strong>Conditions:</strong> ${desc}<br>
-        <strong>Air Pollution:</strong> ${airQualitySanitiser(aqi)}
+        <strong>Visibility:</strong> ${visibility} km<br>
+        <strong>Sunrise:</strong> ${sunrise}<br>
+        <strong>Sunset:</strong> ${sunset}<br>
       </div>
     `;
   };
