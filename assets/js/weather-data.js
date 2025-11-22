@@ -44,7 +44,7 @@ const populateElement = (label, divId, data, units) => {
   if (!element) return;
   let value = data.current[divId] ?? "";
 
-  if (divId === "temp") value = parseInt(value);
+  if (divId === "temp") value = Math.round(value);
   const content = `<span class="data-value">${value}${units || ""}</span>`;
 
   const htmlString = label

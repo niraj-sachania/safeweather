@@ -38,7 +38,6 @@ const initMap = async () => {
 
   // Create popup content
   const createPopupContent = (weatherData) => {
-    console.log(weatherData);
     const temp = weatherData?.current?.temp ?? "N/A";
     const feelsLike = weatherData?.current?.feels_like ?? "N/A";
 
