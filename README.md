@@ -6,6 +6,36 @@
   A real-time weather application that provides intelligent clothing and safety recommendations based on current weather conditions, air quality and UV index.
 </div>
 
+![Safe Weather Application](docs/website.png)
+
+## Table of Contents
+
+- [Project Links](#project-links)
+- [Features](#features)
+- [Design](#design)
+  - [Wireframes](#wireframes)
+  - [Colour Palette](#colour-palette)
+  - [Responsive Views](#responsive-views)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Testing](#testing)
+  - [Manual Testing](#manual-testing)
+  - [Code Validation](#code-validation)
+  - [Performance Testing](#performance-testing)
+- [AI Augmented Development](#ai-augmented-development)
+  - [GitHub Copilot Usage](#github-copilot-usage)
+  - [Copilot Agent Exploration](#copilot-agent-exploration)
+  - [Impact on Development](#impact-on-development)
+- [Team Contributions](#team-contributions)
+- [Data Sources](#data-sources)
+
+## Project Links
+
+- **Live Site**: [https://github.com/niraj-sachania/safeweather](https://github.com/niraj-sachania/safeweather)
+- **User Stories**: [Project Board](https://github.com/users/niraj-sachania/projects/8)
+- **UX Design**: [Miro Board](https://miro.com/app/board/uXjVJp0Hlv8=/?share_link_id=951899658915)
+
 ## Features
 
 - **Real-time Weather Data** - Current temperature, humidity, wind speed and conditions
@@ -27,6 +57,12 @@
 Initial design concepts and user flow:
 
 ![Wireframes](docs/wireframes.png)
+
+### Colour Palette
+
+The application uses a carefully selected colour scheme:
+
+![Colour Palette](docs/color-palette.webp)
 
 ### Responsive Views
 
@@ -82,13 +118,132 @@ safeweather/
 
 3. Open your browser to `http://localhost:8000`
 
-## Team
+## Testing
 
-- **Niraj**
-- **Rob**
-- **Sheena**
-- **Louie**
-- **Mike**
+### Manual Testing
+
+Comprehensive manual testing was performed across all pages and features:
+
+#### Homepage (`index.html`)
+
+- ✅ Search by city name - Successfully retrieves weather data
+- ✅ Search by postcode - Accurately locates and displays weather
+- ✅ Device location - Geolocation API working correctly
+- ✅ Search validation and error handling
+
+#### Weather Page (`weather.html`)
+
+- ✅ Back to home link - Navigation functioning properly
+- ✅ Interactive map - Zoom, pan and click events working
+- ✅ Weather data - API integration pulling through correctly
+- ✅ 5-day forecast - Displaying accurate predictions
+- ✅ Smart recommendations - Logic responding to weather conditions
+
+#### Site-wide
+
+- ✅ Footer links - All external links opening correctly
+- ✅ Responsive design - Tested across mobile, tablet and desktop
+- ✅ Cross-browser compatibility - Verified on Chrome, Firefox, Safari
+
+### Code Validation
+
+#### HTML Validation
+
+All HTML pages pass W3C validation with no errors.
+
+#### CSS Validation
+
+![CSS Validation - Homepage](docs/validation-css-homepage.png)
+![CSS Validation - Weather Page](docs/validation-css-weather.png)
+
+#### HTML Validation
+
+![HTML Validation - Homepage](docs/validation-html-homepage.png)
+![HTML Validation - Weather Page](docs/validation-html-weather.png)
+
+### Performance Testing
+
+Performance testing was conducted using Google PageSpeed Insights:
+
+#### Desktop Performance
+
+![PageSpeed Desktop - Homepage](docs/validation-pagespeed-desktop-homepage.png)
+![PageSpeed Desktop - Weather Page](docs/validation-pagespeed-desktop-weather.png)
+
+#### Mobile Performance
+
+![PageSpeed Mobile - Homepage](docs/validation-pagespeed-mobile-homepage.png)
+![PageSpeed Mobile - Weather Page](docs/validation-pagespeed-mobile-weather.png)
+
+**Note**: Performance scores are impacted by third-party frameworks (Leaflet.js and Bootstrap) which are outside of our control. These dependencies are necessary for the map functionality and responsive design and their performance characteristics affect the overall scores. Our custom code is optimised and follows best practices.
+
+## AI Augmented Development
+
+This project leveraged AI tools extensively throughout the development process, demonstrating how AI can enhance productivity and code quality whilst enabling efficient collaborative workflows.
+
+### GitHub Copilot Usage
+
+GitHub Copilot was integrated throughout the development lifecycle:
+
+- **Documentation Generation** - Generated README markdown from supplied content
+- **Code Understanding** - Explained complex code sections and API integrations
+- **Code Formatting** - Maintained consistent code style across the project
+- **Auto-suggestions** - Provided intelligent code completions during development
+- **Boilerplate Generation** - Accelerated development with template code
+- **Project Planning** - Generated and refined user stories and business goals
+- **Component Initialisation** - Initialised map functionality from supplied data structures and context
+- **Layout Conversion** - Converted custom grid layout to Bootstrap framework
+
+### Copilot Agent Exploration
+
+We conducted an in-depth exploration of GitHub Copilot Agents by assigning a task to implement city auto-suggest functionality in the homepage search box.
+
+**Branches Created:**
+
+- `copilot/add-search-bar-autosuggestions`
+- `copilot/update-location-search-function`
+
+#### Key Learnings
+
+**Context is Critical**
+
+- The quality of output depends heavily on prompt detail and context
+- Initial attempt failed to find a suitable city list API
+- Agent incorrectly selected an existing coordinates API from the project
+- Once provided with the correct API endpoint context, the agent produced an accurate solution
+
+**Code Quality**
+
+- Generated code was clean and well-structured
+- Integrated seamlessly with existing codebase (when proper context was supplied)
+- Agent suggested useful features like keyboard navigation (up/down arrows) for the auto-suggest list
+- Some conflicts arose with existing event handlers, which could be resolved through iterative feedback
+
+**Workflow Advantages**
+
+- Agents create separate branches automatically
+- Provides guidance for local code review:
+  ```bash
+  git fetch --all --prune
+  git checkout --track origin/copilot/add-search-bar-autosuggestions
+  ```
+- Multiple tasks/stories can be worked on simultaneously
+- Significant advantage over traditional in-editor Copilot for parallel development
+
+**Project Decision**
+Ultimately, we chose not to implement the autocomplete functionality to maintain API calls within prescribed limits and avoid exceeding rate restrictions.
+
+### Impact on Development
+
+AI augmentation enabled an efficient workflow throughout the project, accelerating development whilst maintaining code quality and consistency. The experience highlighted both the capabilities and current limitations of AI-assisted development, particularly the importance of providing detailed context for optimal results.
+
+## Team Contributions
+
+- **Louie** - Weather page HTML - [GitHub](https://github.com/LHcode2025)
+- **Mike** - User stories - [LinkedIn](https://www.linkedin.com/in/michael-awanayah-851615128) | [GitHub](https://github.com/mikendab)
+- **Niraj** - Led API integration and development (inc. proxy server configuration) - [LinkedIn](https://www.linkedin.com/in/niraj-sachania/) | [GitHub](https://github.com/niraj-sachania)
+- **Rob** - Led UX design (inc. colour schemes, wireframes) - [LinkedIn](https://www.linkedin.com/in/robertallanfraser/) | [GitHub](https://github.com/RealTimeBasecamp)
+- **Sheena** - Weather forecast component - [LinkedIn](https://www.linkedin.com/in/sheena-anto-3a9720282) | [GitHub](https://github.com/sheenaanto)
 
 ## Data Sources
 
