@@ -5,9 +5,9 @@ export function showLoadingState() {
   const errorState = document.getElementById("error-state");
   const weatherContent = document.getElementById("weather-content");
 
-  if (loadingState) loadingState.classList.remove("d-none");
-  if (errorState) errorState.classList.add("d-none");
-  if (weatherContent) weatherContent.classList.add("d-none");
+  loadingState && loadingState.classList.remove("d-none");
+  errorState && errorState.classList.add("d-none");
+  weatherContent && weatherContent.classList.add("d-none");
 }
 
 export function showWeatherContent() {
@@ -16,10 +16,10 @@ export function showWeatherContent() {
   const weatherContent = document.getElementById("weather-content");
   const footer = document.getElementById("weather-footer");
 
-  if (loadingState) loadingState.classList.add("d-none");
-  if (errorState) errorState.classList.add("d-none");
-  if (weatherContent) weatherContent.classList.remove("d-none");
-  if (footer) footer.classList.remove("d-none");
+  loadingState && loadingState.classList.add("d-none");
+  errorState && errorState.classList.add("d-none");
+  weatherContent && weatherContent.classList.remove("d-none");
+  footer && footer.classList.remove("d-none");
 }
 
 export function showErrorState(errorMessage) {
@@ -29,11 +29,9 @@ export function showErrorState(errorMessage) {
   const footer = document.getElementById("weather-footer");
   const errorMessageEl = document.getElementById("error-message");
 
-  if (loadingState) loadingState.classList.add("d-none");
-  if (errorState) errorState.classList.remove("d-none");
-  if (weatherContent) weatherContent.classList.add("d-none");
-  if (footer) footer.classList.remove("d-none");
-  if (errorMessageEl && errorMessage) {
-    errorMessageEl.textContent = errorMessage;
-  }
+  loadingState && loadingState.classList.add("d-none");
+  errorState && errorState.classList.remove("d-none");
+  weatherContent && weatherContent.classList.add("d-none");
+  footer && footer.classList.remove("d-none");
+  errorMessageEl && errorMessage && (errorMessageEl.textContent = errorMessage);
 }
