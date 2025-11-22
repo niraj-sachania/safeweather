@@ -44,14 +44,14 @@ a {
 /* Homepage: Logo */
 
 .homepage-logo {
-  width: 512px;
-  height: 512px;
+  width: 200px;
+  height: 200px;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 915px) {
   .homepage-logo {
-    width: 200px;
-    height: 200px;
+    width: 512px;
+    height: 512px;
   }
 }
 
@@ -269,7 +269,7 @@ span.data-value {
   text-align: right;
 }
 
-.right-col #temp > span{
+.right-col #temp > span {
   font-size: 2.5rem;
 }
 
@@ -428,6 +428,10 @@ span.data-value {
 
 /* Footer GitHub icon */
 
-.bi-github {
+footer.fixed-bottom {
+  z-index: -1; /* prevent footer overlapping the search content for small screens */
+}
+
+footer .bi-github {
   font-size: 2rem;
 }
