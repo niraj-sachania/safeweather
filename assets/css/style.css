@@ -122,8 +122,10 @@ a {
   transition: background 120ms ease, opacity 120ms ease;
 }
 
-#search-btn:hover {
+#search-btn:hover,
+#search-btn:focus {
   background: #192635;
+  color: #ff9c00;
 }
 
 #search-btn:active {
