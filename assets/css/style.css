@@ -16,6 +16,13 @@
 
 /* High level elements */
 
+*:focus, *:focus-visible, *:active {
+  border-color: #ff9c00 !important;
+  outline-color: #ff9c00 !important;
+  box-shadow: none !important;
+  border-radius: 2px;
+}
+
 body {
   font-family: "Inter", sans-serif;
   color: #ffffff;
@@ -39,6 +46,11 @@ h3 {
 
 a {
   color: #ff9c00;
+}
+
+a:focus {
+  outline: 2px solid #ff9c00;
+  outline-offset: 2px;
 }
 
 /* Homepage: Logo */
@@ -87,7 +99,7 @@ a {
 }
 
 #search input.form-control:focus {
-  outline: 2px solid rgba(0, 116, 232, 0.18);
+  outline: 2px solid #ff9c00;
   outline-offset: 0;
 }
 
@@ -122,8 +134,10 @@ a {
   transition: background 120ms ease, opacity 120ms ease;
 }
 
-#search-btn:hover {
+#search-btn:hover,
+#search-btn:focus {
   background: #192635;
+  color: #ff9c00;
 }
 
 #search-btn:active {
@@ -131,7 +145,8 @@ a {
 }
 
 #search-btn:focus {
-  outline: 2px solid rgba(0, 116, 232, 0.18);
+  outline: 2px solid #ff9c00;
+  outline-offset: 2px;
 }
 
 /* Small screens: stack input and button */
@@ -178,11 +193,20 @@ a {
 #location-btn {
   color: inherit;
   text-decoration: none;
+  border: none !important;
+  box-shadow: none !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 #location-btn:hover,
 #location-btn:focus {
   color: #ff9c00;
+  outline: 2px solid #ff9c00 !important;
+  outline-offset: 4px;
+  box-shadow: none !important;
 }
 
 .search-results-list {
@@ -206,9 +230,15 @@ a {
 }
 
 .search-result-btn:hover,
-.search-result-btn:focus {
+.search-result-btn:focus,
+.search-result-btn.selected {
   background: rgba(255, 255, 255, 0.03);
   outline: none;
+}
+
+.search-result-btn:focus,
+.search-result-btn.selected {
+  border-color: #ff9c00;
 }
 
 /* Loading spinner */
@@ -237,6 +267,13 @@ a {
 header a .bi-chevron-left {
   font-size: 2rem !important;
   color: #fff;
+}
+
+/* Weather page: Error state */
+
+.error-icon {
+  font-size: 3rem;
+  color: #ff9c00;
 }
 
 header > a > i {
@@ -482,7 +519,22 @@ span.data-value {
   }
 }
 
-/* Footer GitHub icon */
+/* Footer icons and links */
 footer .bi-github {
   font-size: 2rem;
+}
+
+footer a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+footer a:focus {
+  outline-offset: 4px;
+}
+
+footer .footer-logo {
+  display: block;
 }
