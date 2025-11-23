@@ -54,8 +54,8 @@ if (!resultsContainer) {
     handleSearch();
   });
 
-  // Geo icon: get browser geolocation and load weather page for current position
-  document.querySelector("i.bi-geo-alt").addEventListener("click", async () => {
+  // Geo button: get browser geolocation and load weather page for current position
+  document.querySelector("#location-btn").addEventListener("click", async () => {
     btn.disabled = true;
     showMessage("Detecting your location...");
     try {
