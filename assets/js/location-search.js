@@ -40,13 +40,55 @@ if (!resultsContainer) {
   // Update button state on input
   input && input.addEventListener("input", updateButtonState);
 
-  // Allow pressing Enter in the input to trigger the search
+  // Track selected result index for keyboard navigation
+  let selectedIndex = -1;
+
+  // Allow pressing Enter in the input to trigger the search, arrow keys to navigate results
   input.addEventListener("keydown", (e) => {
+    const resultButtons = resultsContainer.querySelectorAll(".search-result-btn");
+    
     if (e.key === "Enter") {
       e.preventDefault();
-      input.value.trim() && handleSearch();
+      // If a result is selected, click it; otherwise perform search
+      if (selectedIndex >= 0 && resultButtons[selectedIndex]) {
+        resultButtons[selectedIndex].click();
+      } else {
+        input.value.trim() && handleSearch();
+      }
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (resultButtons.length > 0) {
+        selectedIndex = (selectedIndex + 1) % resultButtons.length;
+        updateSelectedResult(resultButtons);
+      }
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (resultButtons.length > 0) {
+        selectedIndex = selectedIndex <= 0 ? resultButtons.length - 1 : selectedIndex - 1;
+        updateSelectedResult(resultButtons);
+      }
     }
   });
+
+  // Helper function to update visual selection without moving focus
+  const updateSelectedResult = (resultButtons) => {
+    resultButtons.forEach((btn, idx) => {
+      if (idx === selectedIndex) {
+        btn.classList.add("selected");
+        btn.scrollIntoView({ block: "nearest" });
+      } else {
+        btn.classList.remove("selected");
+      }
+    });
+  };
+
+  // Reset selected index when results change
+  const resetSelection = () => {
+    selectedIndex = -1;
+  };
+
+  // Make resetSelection globally accessible
+  window.resetSelection = resetSelection;
 
   // Search by clicking button
   btn.addEventListener("click", (e) => {
@@ -207,4 +249,7 @@ const renderChoices = (items) => {
 
   resultsContainer.appendChild(list);
   resultsContainer.classList.add("open");
+  
+  // Reset keyboard selection when new results are displayed
+  window.resetSelection && window.resetSelection();
 };
