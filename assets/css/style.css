@@ -175,8 +175,14 @@ a {
   display: block;
 }
 
-.bi-geo-alt {
-  cursor: pointer;
+#location-btn {
+  color: inherit;
+  text-decoration: none;
+}
+
+#location-btn:hover,
+#location-btn:focus {
+  color: #ff9c00;
 }
 
 .search-results-list {
