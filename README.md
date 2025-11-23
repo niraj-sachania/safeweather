@@ -125,6 +125,9 @@ Comprehensive manual testing was performed across all pages and features:
 - ✅ Search by postcode - Accurately locates and displays weather
 - ✅ Device location - Geolocation API working correctly
 - ✅ Search validation and error handling
+- ✅ Invalid search input (e.g. 'aaaa') - Returns "Lookup failed. Please try again."
+- ✅ Unique city name (e.g. 'Thrissur') - Takes straight to the weather page
+- ✅ Common city name (e.g. 'London') - Prompts user to select which location
 
 #### Weather Page (`weather.html`)
 
